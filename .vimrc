@@ -1,15 +1,39 @@
+"for clang_complete plugin (for windows)
+"let g:clang_complete_auto = 1
+"let g:clang_complete_copen = 1
+"let g:clang_hl_errors = 1
+"let g:clang_periodic_quickfix = 0
+"let g:clang_snippets = 1
+"let g:clang_conceal_snippets = 0
+"let g:clang_exec = 'c:\\bin\\clang.exe'
+"let g:clang_user_options = '|| exit 0'
+"let g:clang_use_library = 1
+"let g:clang_library_path = 'c:\\bin'
+"let g:clang_debug = 0
+"-------------------------------
+
+set shell=/bin/bash
+
+"colorscheme evening
+colorscheme desert
+
 set nocompatible
 
 set fileencoding=utf-8
+
+"백스페이스 사용
 set bs=indent,eol,start
 
 set tabstop=4
 set sw=4
 
+"검색어 강조
 set hls
 
+"파일 종류 자동 인식
 filetype on
 
+"커서 위치 표시
 set ru
 
 filet plugin indent on
@@ -18,9 +42,14 @@ syntax on
 set ai
 set si
 set nocindent
+set noexpandtab
 
-"colorscheme evening
-colorscheme desert
+"google protocol buffer
+au BufRead,BufNewFile *.proto set filetype=proto
+au! Syntax proto source $VIM\vimfiles\syntax\proto.vim
+
+"set gvim font
+set guifont=consolas:h10
 
 set laststatus=2
 "set statusline=%h%F%m%r%=[%l:%c(%p%%)]
@@ -61,6 +90,7 @@ call vundle#rc()
 " let Vundle manage Vundle
 " required! 
 Bundle 'gmarik/vundle'
+
 Bundle 'tobyS/pdv'
 Bundle 'SirVer/ultisnips'
 Bundle 'Syntastic'
@@ -84,6 +114,22 @@ filetype plugin indent on     " required!
 "
 " see :h vundle for more details or wiki for FAQ
 " NOTE: comments after Bundle command are not allowed..
+
+"----------jedi-vim settings-------
+"let g:jedi#use_tabs_not_buffers = 1
+"let g:jedi#auto_initialization = 1,
+"let g:jedi#auto_vim_configuration=  1
+"let g:jedi#goto_command = '<leader>g'
+"let g:jedi#autocompletion_command =  '<C-Space>'
+"let g:jedi#get_definition_command = '<leader>d'
+"let g:jedi#related_names_command = '<leader>n'
+"let g:jedi#rename_command = '<leader>r'
+"let g:jedi#popup_on_dot = 1
+"let g:jedi#pydoc = 'K'
+"let g:jedi#show_function_definition = 1
+"let g:jedi#function_definition_escape = '≡'
+"let g:jedi#auto_close_doc = 1
+"let g:jedi#popup_select_first = 1
 
 " ======= neocomplcache =============
 " Disable AutoComplPop. Comment out this line if AutoComplPop is not installed.
