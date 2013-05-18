@@ -13,6 +13,7 @@
 "-------------------------------
 
 set shell=/bin/bash
+set term=xterm-256color
 
 "colorscheme evening
 colorscheme desert
