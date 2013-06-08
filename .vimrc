@@ -1,49 +1,48 @@
-"for clang_complete plugin (for windows)
-"let g:clang_complete_auto = 1
-"let g:clang_complete_copen = 1
-"let g:clang_hl_errors = 1
-"let g:clang_periodic_quickfix = 0
-"let g:clang_snippets = 1
-"let g:clang_conceal_snippets = 0
-"let g:clang_exec = 'c:\\bin\\clang.exe'
-"let g:clang_user_options = '|| exit 0'
-"let g:clang_use_library = 1
-"let g:clang_library_path = 'c:\\bin'
-"let g:clang_debug = 0
-"-------------------------------
-
-set shell=/bin/bash
-set term=xterm-256color
+if has('win32')
+	"for clang_complete plugin (for windows)
+	let g:clang_complete_auto = 1
+	let g:clang_complete_copen = 1
+	let g:clang_hl_errors = 1
+	let g:clang_periodic_quickfix = 0
+	let g:clang_snippets = 1
+	let g:clang_conceal_snippets = 0
+	let g:clang_exec = 'c:\\bin\\clang.exe'
+	let g:clang_user_options = '|| exit 0'
+	let g:clang_use_library = 1
+	let g:clang_library_path = 'c:\\bin'
+	let g:clang_debug = 0
+endif
 
 "colorscheme evening
 colorscheme desert
 
-set nocompatible
+set fileencodings=utf-8,cp949
 
-set fileencoding=utf-8
-
-"ë°±ìŠ¤í˜ì´ìŠ¤ ì‚¬ìš©
+"¹é½ºÆäÀÌ½º »ç¿ë
 set bs=indent,eol,start
 
+"ÅÇ Å©±â ¼³Á¤
 set tabstop=4
 set sw=4
 
-"ê²€ìƒ‰ì–´ ê°•ì¡°
+"°Ë»ö¾î °­Á¶
 set hls
 
-"íŒŒì¼ ì¢…ë¥˜ ìë™ ì¸ì‹
-filetype on
-
-"ì»¤ì„œ ìœ„ì¹˜ í‘œì‹œ
+"Ä¿¼­ À§Ä¡ Ç×»ó Ç¥½Ã
 set ru
 
+"ÆÄÀÏ Á¾·ù ÀÚµ¿ ÀÎ½Ä
 filet plugin indent on
+
+"syntax highlight on
 syntax on
 
+"ÀÚµ¿ µé¿©¾²±â
 set ai
+"¶È¶ÈÇÑ µé¿©¾²±â
 set si
+"c µé¿©¾²±â »ç¿ë¾ÈÇÔ
 set nocindent
-set noexpandtab
 
 "google protocol buffer
 au BufRead,BufNewFile *.proto set filetype=proto
@@ -57,28 +56,24 @@ set laststatus=2
 "set statusline=%<%F%h%m%r%h%w%y\ %{strftime(\"%Y/%m/%d-%H:%M\")}%=\ col:%c%V\ ascii:%b\ pos:%o\ lin:%l\,%L\ %P
 "set statusline=%<%F%w%h%m%r[%{&ff}/%Y][%{getcwd()}]%=(col:%c%V\ pos:%o\ line:%l\,%L\ %p%%)
 
-if v:lang =~ "^ko"
-  set encoding=cp949
-  set fileencodings=utf-8,cp949
-  set guifontset=-*-*-medium-r-normal--16-*-*-*-*-*-*-*
-elseif v:lang =~ "^ja_JP"
-  set fileencodings=euc-jp
-  set guifontset=-misc-fixed-medium-r-normal--14-*-*-*-*-*-*-*
-elseif v:lang =~ "^zh_TW"
-  set fileencodings=big5
-  set guifontset=-sony-fixed-medium-r-normal--16-150-75-75-c-80-iso8859-1,-taipei-fixed-medium-r-normal--16-150-75-75-c-160-big5-0
-elseif v:lang =~ "^zh_CN"
-  set fileencodings=gb2312
-  set guifontset=*-r-*
-endif
-if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
-  set encoding=utf-8
-  set fileencodings=utf-8,cp949
-endif
-
-" 80 column layout
-"highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-"match OverLength /\%81v.\+/
+"if v:lang =~ "^ko"
+"  set encoding=cp949
+"  set fileencodings=utf-8,cp949
+"  set guifontset=-*-*-medium-r-normal--16-*-*-*-*-*-*-*
+"elseif v:lang =~ "^ja_JP"
+"  set fileencodings=euc-jp
+"  set guifontset=-misc-fixed-medium-r-normal--14-*-*-*-*-*-*-*
+"elseif v:lang =~ "^zh_TW"
+"  set fileencodings=big5
+"  set guifontset=-sony-fixed-medium-r-normal--16-150-75-75-c-80-iso8859-1,-taipei-fixed-medium-r-normal--16-150-75-75-c-160-big5-0
+"elseif v:lang =~ "^zh_CN"
+"  set fileencodings=gb2312
+"  set guifontset=*-r-*
+"endif
+"if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
+"  set encoding=utf-8
+"  set fileencodings=utf-8,cp949
+"endif
 
 
 "======= settings for vundle ===================
@@ -100,10 +95,17 @@ Bundle 'taglist.vim'
 Bundle 'Command-T'
 "Bundle 'AutoComplPop'
 Bundle 'neocomplcache'
-"Bundle 'Lokaltog/powerline'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'scrooloose/nerdtree'
 Bundle 'klen/python-mode'
+" hex mode
+Bundle 'hexman.vim'
+
+if has('win32')
+	"transparency windows vim (windows gvim)
+	Bundle 'VimTweak'
+	Bundle 'mattn/transparency-windows-vim'
+endif
 
 filetype plugin indent on     " required!
 "
@@ -128,9 +130,10 @@ filetype plugin indent on     " required!
 "let g:jedi#popup_on_dot = 1
 "let g:jedi#pydoc = 'K'
 "let g:jedi#show_function_definition = 1
-"let g:jedi#function_definition_escape = 'â‰¡'
+"let g:jedi#function_definition_escape = '¡Õ'
 "let g:jedi#auto_close_doc = 1
 "let g:jedi#popup_select_first = 1
+
 
 " ======= neocomplcache =============
 " Disable AutoComplPop. Comment out this line if AutoComplPop is not installed.
@@ -168,7 +171,7 @@ inoremap <expr><C-g>     neocomplcache#undo_completion()
 inoremap <expr><C-l>     neocomplcache#complete_common_string()
 
 " SuperTab like snippets behavior.
-imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+"imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " Recommended key-mappings.
 " <CR>: close popup and save indent.
@@ -260,8 +263,29 @@ let g:pymode_folding = 0
 " == Highlight excess line length (python) == 
 augroup vimrc_autocmds
     autocmd!
-    " highlight characters past column 120
+    " highlight characters past column 120 
     autocmd FileType python highlight Excess ctermbg=DarkGrey guibg=Black
     autocmd FileType python match Excess /\%120v.*/
     autocmd FileType python set nowrap
 augroup END
+
+" hexmap key mapping
+map <F6> <Plug>HexManager
+"<leader> hm	HexManager: Call/Leave Hexmode (using xxd) 
+"<leader> hd  	HexDelete: delete hex character under cursor 
+"<leader> hi  	HexInsert: Insert Ascii character before cursor 
+"<leader> hg  	HexGoto: Goto hex offset. 
+"<leader> hn  	HexNext: Goto next hex offset. 
+"<leader> hp  	HexPrev: Goto previous hex offset. 
+"<leader> hs  	HexStatus: Show / Hide hexoffset infos in statusline 
+"                         and related ascii column 
+
+" Taglist Cmd
+" :TlistToggle	open/close the taglist window.
+" :TlistUpdate	update the tags for the current buffer.
+"
+
+"tabº¯È¯ »ç¿ë¾ÈÇÔ.
+set noexpandtab
+"eol Ãß°¡ ¸·±â
+"set binary noeol
