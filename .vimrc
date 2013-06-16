@@ -48,33 +48,15 @@ set nocindent
 au BufRead,BufNewFile *.proto set filetype=proto
 au! Syntax proto source $VIM\vimfiles\syntax\proto.vim
 
-"set gvim font
-set guifont=consolas:h10
+if has('gui_running')
+	"set gvim font
+	set guifont=consolas:h10
+endif
 
 set laststatus=2
 "set statusline=%h%F%m%r%=[%l:%c(%p%%)]
 "set statusline=%<%F%h%m%r%h%w%y\ %{strftime(\"%Y/%m/%d-%H:%M\")}%=\ col:%c%V\ ascii:%b\ pos:%o\ lin:%l\,%L\ %P
 "set statusline=%<%F%w%h%m%r[%{&ff}/%Y][%{getcwd()}]%=(col:%c%V\ pos:%o\ line:%l\,%L\ %p%%)
-
-"if v:lang =~ "^ko"
-"  set encoding=cp949
-"  set fileencodings=utf-8,cp949
-"  set guifontset=-*-*-medium-r-normal--16-*-*-*-*-*-*-*
-"elseif v:lang =~ "^ja_JP"
-"  set fileencodings=euc-jp
-"  set guifontset=-misc-fixed-medium-r-normal--14-*-*-*-*-*-*-*
-"elseif v:lang =~ "^zh_TW"
-"  set fileencodings=big5
-"  set guifontset=-sony-fixed-medium-r-normal--16-150-75-75-c-80-iso8859-1,-taipei-fixed-medium-r-normal--16-150-75-75-c-160-big5-0
-"elseif v:lang =~ "^zh_CN"
-"  set fileencodings=gb2312
-"  set guifontset=*-r-*
-"endif
-"if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
-"  set encoding=utf-8
-"  set fileencodings=utf-8,cp949
-"endif
-
 
 "======= settings for vundle ===================
 set nocompatible               " be iMproved
@@ -118,22 +100,6 @@ filetype plugin indent on     " required!
 " see :h vundle for more details or wiki for FAQ
 " NOTE: comments after Bundle command are not allowed..
 
-"----------jedi-vim settings-------
-"let g:jedi#use_tabs_not_buffers = 1
-"let g:jedi#auto_initialization = 1,
-"let g:jedi#auto_vim_configuration=  1
-"let g:jedi#goto_command = '<leader>g'
-"let g:jedi#autocompletion_command =  '<C-Space>'
-"let g:jedi#get_definition_command = '<leader>d'
-"let g:jedi#related_names_command = '<leader>n'
-"let g:jedi#rename_command = '<leader>r'
-"let g:jedi#popup_on_dot = 1
-"let g:jedi#pydoc = 'K'
-"let g:jedi#show_function_definition = 1
-"let g:jedi#function_definition_escape = 'กี'
-"let g:jedi#auto_close_doc = 1
-"let g:jedi#popup_select_first = 1
-
 
 " ======= neocomplcache =============
 " Disable AutoComplPop. Comment out this line if AutoComplPop is not installed.
@@ -170,48 +136,29 @@ smap <C-k>     <Plug>(neocomplcache_snippets_expand)
 inoremap <expr><C-g>     neocomplcache#undo_completion()
 inoremap <expr><C-l>     neocomplcache#complete_common_string()
 
-" SuperTab like snippets behavior.
-"imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-"inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
 " <TAB>: completion.
-"inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-"inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-"inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-"inoremap <expr><C-y>  neocomplcache#close_popup()
-"inoremap <expr><C-e>  neocomplcache#cancel_popup()
-
-" AutoComplPop like behavior.
-"let g:neocomplcache_enable_auto_select = 1
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " Enable omni completion. Not required if they are already set elsewhere in .vimrc
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+"autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 " Enable heavy omni completion, which require computational power and may stall the vim. 
 if !exists('g:neocomplcache_omni_patterns')
   let g:neocomplcache_omni_patterns = {}
 endif
-let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-"autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
 let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
 
 
-" == powerline setting ==
-"set rtp+=~/.vimrc/bundle/powerline/powerline/bindings/vim
-
-" == NerdTree setting ==
+" ========== NerdTree setting =============
 map <F2> :NERDTreeToggle<CR>
 
-" == python-mode settings ==
+" ========== python-mode settings =============
 " Python-mode
 " Activate rope
 " Keys:
