@@ -16,7 +16,8 @@ endif
 "colorscheme evening
 colorscheme desert
 
-set fileencodings=utf-8,cp949
+set fileencoding=utf-8
+set fileencodings=ucs-bom,utf-8,cp949,latin1
 
 "백스페이스 사용
 set bs=indent,eol,start
@@ -210,9 +211,9 @@ let g:pymode_folding = 0
 " == Highlight excess line length (python) == 
 augroup vimrc_autocmds
     autocmd!
-    " highlight characters past column 120 
+    " highlight characters past column 80 
     autocmd FileType python highlight Excess ctermbg=DarkGrey guibg=Black
-    autocmd FileType python match Excess /\%120v.*/
+    autocmd FileType python match Excess /\%80v.*/
     autocmd FileType python set nowrap
 augroup END
 
@@ -236,3 +237,11 @@ map <F6> <Plug>HexManager
 set noexpandtab
 "eol 추가 막기
 "set binary noeol
+
+"map <F4> :TlistToggle<CR><CR>
+" insert current timestamp
+nmap <F5> a<C-R>=strftime("%Y-%m-%d %I:%M:%S")<CR><Esc>
+imap <F5> <C-R>=strftime("%Y-%m-%d %I:%M:%S")<CR>
+
+
+
