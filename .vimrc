@@ -1,18 +1,3 @@
-if has('win32')
-	"for clang_complete plugin (for windows)
-	let g:clang_complete_auto = 1
-	let g:clang_complete_copen = 1
-	let g:clang_hl_errors = 1
-	let g:clang_periodic_quickfix = 0
-	let g:clang_snippets = 1
-	let g:clang_conceal_snippets = 0
-	let g:clang_exec = 'c:\\bin\\clang.exe'
-	let g:clang_user_options = '|| exit 0'
-	let g:clang_use_library = 1
-	let g:clang_library_path = 'c:\\bin'
-	let g:clang_debug = 0
-endif
-
 "colorscheme evening
 colorscheme desert
 
@@ -51,7 +36,7 @@ au! Syntax proto source $VIM\vimfiles\syntax\proto.vim
 
 if has('gui_running')
 	"set gvim font
-	set guifont=consolas:h10
+	set guifont=consolas:h12
 endif
 
 set laststatus=2
@@ -76,8 +61,7 @@ Bundle 'Syntastic'
 Bundle 'pathogen.vim'
 Bundle 'taglist.vim'
 Bundle 'Command-T'
-"Bundle 'AutoComplPop'
-Bundle 'neocomplcache'
+Bundle 'Valloric/YouCompleteMe'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'scrooloose/nerdtree'
 Bundle 'klen/python-mode'
@@ -101,60 +85,22 @@ filetype plugin indent on     " required!
 " see :h vundle for more details or wiki for FAQ
 " NOTE: comments after Bundle command are not allowed..
 
-
-" ======= neocomplcache =============
-" Disable AutoComplPop. Comment out this line if AutoComplPop is not installed.
-"let g:acp_enableAtStartup = 0
-" Launches neocomplcache automatically on vim startup.
-let g:neocomplcache_enable_at_startup = 1
-" Use smartcase.
-let g:neocomplcache_enable_smart_case = 1
-" Use camel case completion.
-let g:neocomplcache_enable_camel_case_completion = 1
-" Use underscore completion.
-let g:neocomplcache_enable_underbar_completion = 1
-" Sets minimum char length of syntax keyword.
-let g:neocomplcache_min_syntax_length = 3
-" buffer file name pattern that locks neocomplcache. e.g. ku.vim or fuzzyfinder 
-let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-
-" Define file-type dependent dictionaries.
-let g:neocomplcache_dictionary_filetype_lists = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions'
-    \ }
-
-" Define keyword, for minor languages
-if !exists('g:neocomplcache_keyword_patterns')
-  let g:neocomplcache_keyword_patterns = {}
-endif
-let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
-
-" Plugin key-mappings.
-imap <C-k>     <Plug>(neocomplcache_snippets_expand)
-smap <C-k>     <Plug>(neocomplcache_snippets_expand)
-inoremap <expr><C-g>     neocomplcache#undo_completion()
-inoremap <expr><C-l>     neocomplcache#complete_common_string()
-
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-
-" Enable omni completion. Not required if they are already set elsewhere in .vimrc
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-"autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-" Enable heavy omni completion, which require computational power and may stall the vim. 
-if !exists('g:neocomplcache_omni_patterns')
-  let g:neocomplcache_omni_patterns = {}
-endif
-let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
-let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
-
+let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+let g:ycm_confirm_extra_conf = 1
+let g:ycm_extra_conf_globlist = ['~/.vim/*']
+" ========== YcmCompleter subcommands =============
+" :YcmCompleter GoToDeclaration
+" :YcmCompleter GoToDefinition
+" :YcmCompleter GoToDefinitionElseDeclaration
+"
+" You may also want to map the subcommands to something less verbose; for
+" instance, nnoremap <leader>jd :YcmCompleter
+" GoToDefinitionElseDeclaration<CR> maps the <leader>jd sequence to the longer
+" subcommand invocation.
+"
+" The various GoTo* subcommands add entries to Vim's jumplist so you can use
+" CTRL-O to jump back to where you where before invoking the command (and
+" CTRL-I to jump forward; see :h jumplist for details).
 
 " ========== NerdTree setting =============
 map <F2> :NERDTreeToggle<CR>
@@ -173,7 +119,7 @@ map <F2> :NERDTreeToggle<CR>
 " ]]            Jump on next class or function (normal, visual, operator modes)
 " [M            Jump on previous class or method (normal, visual, operator modes)
 " ]M            Jump on next class or method (normal, visual, operator modes)
-let g:pymode_rope = 1
+let g:pymode_rope = 0
 "disable run python code
 let g:pymode_run = 0 
 
@@ -240,8 +186,9 @@ set noexpandtab
 
 "map <F4> :TlistToggle<CR><CR>
 " insert current timestamp
-nmap <F5> a<C-R>=strftime("%Y-%m-%d %I:%M:%S")<CR><Esc>
-imap <F5> <C-R>=strftime("%Y-%m-%d %I:%M:%S")<CR>
+"nmap <F5> a<C-R>=strftime("%Y-%m-%d %I:%M:%S")<CR><Esc>
+"imap <F5> <C-R>=strftime("%Y-%m-%d %I:%M:%S")<CR>
 
-
-
+"cpp, h switch
+" :e %<.cpp
+" :e %<.h
