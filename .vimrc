@@ -4,30 +4,30 @@ colorscheme desert
 set fileencoding=utf-8
 set fileencodings=ucs-bom,utf-8,cp949,latin1
 
-"¹é½ºÆäÀÌ½º »ç¿ë
+"ë°±ìŠ¤í˜ì´ìŠ¤ ì‚¬ìš©
 set bs=indent,eol,start
 
-"ÅÇ Å©±â ¼³Á¤
+"íƒ­ í¬ê¸° ì„¤ì •
 set tabstop=4
 set sw=4
 
-"°Ë»ö¾î °­Á¶
+"ê²€ìƒ‰ì–´ ê°•ì¡°
 set hls
 
-"Ä¿¼­ À§Ä¡ Ç×»ó Ç¥½Ã
+"ì»¤ì„œ ìœ„ì¹˜ í•­ìƒ í‘œì‹œ
 set ru
 
-"ÆÄÀÏ Á¾·ù ÀÚµ¿ ÀÎ½Ä
+"íŒŒì¼ ì¢…ë¥˜ ìë™ ì¸ì‹
 filet plugin indent on
 
 "syntax highlight on
 syntax on
 
-"ÀÚµ¿ µé¿©¾²±â
+"ìë™ ë“¤ì—¬ì“°ê¸°
 set ai
-"¶È¶ÈÇÑ µé¿©¾²±â
+"ë˜‘ë˜‘í•œ ë“¤ì—¬ì“°ê¸°
 set si
-"c µé¿©¾²±â »ç¿ë¾ÈÇÔ
+"c ë“¤ì—¬ì“°ê¸° ì‚¬ìš©ì•ˆí•¨
 set nocindent
 
 "google protocol buffer
@@ -179,9 +179,9 @@ map <F6> <Plug>HexManager
 " :TlistUpdate	update the tags for the current buffer.
 "
 
-"tabº¯È¯ »ç¿ë¾ÈÇÔ.
+"tabë³€í™˜ ì‚¬ìš©ì•ˆí•¨.
 set noexpandtab
-"eol Ãß°¡ ¸·±â
+"eol ì¶”ê°€ ë§‰ê¸°
 "set binary noeol
 
 "map <F4> :TlistToggle<CR><CR>
