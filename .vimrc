@@ -3,6 +3,11 @@ colorscheme desert
 
 set fileencoding=utf-8
 set fileencodings=ucs-bom,utf-8,cp949,latin1
+set enc=utf-8
+
+if has('win32')
+	language messages ko_kr.utf-8
+endif
 
 "백스페이스 사용
 set bs=indent,eol,start
@@ -36,7 +41,7 @@ au! Syntax proto source $VIM\vimfiles\syntax\proto.vim
 
 if has('gui_running')
 	"set gvim font
-	set guifont=consolas:h12
+	set guifont=consolas:h10
 endif
 
 set laststatus=2
@@ -67,6 +72,7 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'klen/python-mode'
 " hex mode
 Bundle 'hexman.vim'
+Bundle 'Yggdroot/indentLine'
 
 if has('win32')
 	"transparency windows vim (windows gvim)
