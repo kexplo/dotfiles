@@ -184,6 +184,13 @@ map <F6> <Plug>HexManager
 " :TlistToggle	open/close the taglist window.
 " :TlistUpdate	update the tags for the current buffer.
 "
+"
+let g:indentLine_char = '┆'
+let g:indentLine_color_term = 239
+let g:indentLine_color_gui = '#A4E57E'
+
+"tab visualize
+set list lcs=tab:\|\ 
 
 "tab변환 사용안함.
 set noexpandtab
