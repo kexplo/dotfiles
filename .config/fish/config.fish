@@ -36,5 +36,3 @@ function fish_prompt --description 'Write out the prompt'
 
     end
 end
-
-set -x GREP_OPTIONS --color=always
