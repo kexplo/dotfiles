@@ -53,43 +53,44 @@ set laststatus=2
 set nocompatible               " be iMproved
 filetype off                   " required!
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
 " let Vundle manage Vundle
 " required! 
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/Vundle.vim'
 
-Bundle 'tobyS/pdv'
-Bundle 'SirVer/ultisnips'
-Bundle 'Syntastic'
-Bundle 'pathogen.vim'
-Bundle 'taglist.vim'
-Bundle 'Command-T'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'Lokaltog/vim-powerline'
-Bundle 'scrooloose/nerdtree'
-Bundle 'klen/python-mode'
+Plugin 'tobyS/pdv'
+Plugin 'SirVer/ultisnips'
+Plugin 'Syntastic'
+Plugin 'pathogen.vim'
+Plugin 'taglist.vim'
+Plugin 'Command-T'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'Lokaltog/vim-powerline'
+Plugin 'scrooloose/nerdtree'
+Plugin 'klen/python-mode'
 " hex mode
-Bundle 'hexman.vim'
-Bundle 'Yggdroot/indentLine'
+Plugin 'hexman.vim'
+Plugin 'Yggdroot/indentLine'
 
 if has('win32')
 	"transparency windows vim (windows gvim)
-	Bundle 'VimTweak'
-	Bundle 'mattn/transparency-windows-vim'
+	Plugin 'VimTweak'
+	Plugin 'mattn/transparency-windows-vim'
 endif
 
+call vundle#end()             " required!
 filetype plugin indent on     " required!
 "
 " Brief help
-" :BundleList          - list configured bundles
-" :BundleInstall(!)    - install(update) bundles
-" :BundleSearch(!) foo - search(or refresh cache first) for foo
-" :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
+" :PluginList          - list configured bundles
+" :PluginInstall(!)    - install(update) bundles
+" :PluginSearch(!) foo - search(or refresh cache first) for foo
+" :PluginClean(!)      - confirm(or auto-approve) removal of unused bundles
 "
 " see :h vundle for more details or wiki for FAQ
-" NOTE: comments after Bundle command are not allowed..
+" NOTE: comments after Plugin command are not allowed..
 
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf = 1
