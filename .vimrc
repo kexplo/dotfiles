@@ -64,13 +64,17 @@ call vundle#begin()
 " required! 
 Plugin 'gmarik/Vundle.vim'
 
+" php document for vim
 Plugin 'tobyS/pdv'
+" ultimate solution for snippets in Vim (integrates with YouCompleteMe)
 Plugin 'SirVer/ultisnips'
+" a code-completion engine for Vim
+Plugin 'Valloric/YouCompleteMe'
+" syntax checking plugin for Vim
 Plugin 'Syntastic'
 Plugin 'pathogen.vim'
 Plugin 'taglist.vim'
 Plugin 'Command-T'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'Lokaltog/vim-powerline'
 Plugin 'scrooloose/nerdtree'
 Plugin 'klen/python-mode'
