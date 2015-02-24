@@ -1,7 +1,3 @@
-"for fish shell
-"set shell=/bin/bash
-"set term=xterm-256color
-
 "colorscheme evening
 colorscheme desert
 
@@ -11,6 +7,12 @@ set enc=utf-8
 
 if has('win32')
 	language messages ko_kr.utf-8
+else
+	"for fish shell
+	if &shell =~# 'fish$'
+		set shell=/bin/bash
+		set term=xterm-256color
+	endif
 endif
 
 "백스페이스 사용
