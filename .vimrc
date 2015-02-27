@@ -219,3 +219,14 @@ set noexpandtab
 "My Custom KeyMapping
 nnoremap <F4> :TlistToggle<CR><CR>
 nnoremap <F12> :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+"key memo
+"Ctrl-E, Ctrl-Y // up down scroll without moving the cursor
+"Ctrl-u // moves screen up 1/2 page
+"Ctrl-d // moves screen down 1/2 page
+"Ctrl-b // moves screen up one page
+"Ctrl-f // moves screen down one page
+"
+"z-z // move current line to the middle of the screen
+"z-t // move current line to the top of the screen
+"z-b // move current line to the bottom of the screen
