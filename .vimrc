@@ -70,6 +70,9 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'tobyS/pdv'
 " ultimate solution for snippets in Vim (integrates with YouCompleteMe)
 Plugin 'SirVer/ultisnips'
+" My Snippets
+Plugin 'kexplo/vim-snippets'
+
 " a code-completion engine for Vim
 Plugin 'Valloric/YouCompleteMe'
 " syntax checking plugin for Vim
@@ -103,6 +106,19 @@ filetype plugin indent on     " required!
 "
 " see :h vundle for more details or wiki for FAQ
 " NOTE: comments after Plugin command are not allowed..
+
+" ========== ultinips settings =============
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<c-k>"
+let g:UltiSnipsJumpForwardTrigger="<c-l>"
+let g:UltiSnipsJumpBackwardTrigger="<c-j>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/bundle/vim-snippets/UltiSnips']
+
+" ================
 
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf = 1
