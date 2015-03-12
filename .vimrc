@@ -217,10 +217,11 @@ set noexpandtab
 "cpp, h switch
 " :e %<.cpp
 " :e %<.h
-
+"
 "My Custom KeyMapping
 nnoremap <F4> :TlistToggle<CR><CR>
 nnoremap <F12> :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <F7> :PymodeLint<CR><CR>
 
 "key memo
 "Ctrl-E, Ctrl-Y // up down scroll without moving the cursor
