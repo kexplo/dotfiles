@@ -1,3 +1,4 @@
+# git shell
 function fish_prompt --description 'Write out the prompt'
     # Just calculate these once, to save a few cycles when displaying the prompt
     if not set -q __fish_prompt_hostname
@@ -36,3 +37,7 @@ function fish_prompt --description 'Write out the prompt'
 
     end
 end
+
+
+# fix tmux coloring problem
+alias tmux="tmux -2"
