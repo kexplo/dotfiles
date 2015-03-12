@@ -118,6 +118,9 @@ let g:UltiSnipsEditSplit="vertical"
 
 let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/bundle/vim-snippets/UltiSnips']
 
+" set python docstring style
+let g:ultisnips_python_style="sphinx"
+
 " ================
 
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
