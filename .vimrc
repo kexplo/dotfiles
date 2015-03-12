@@ -83,6 +83,8 @@ Plugin 'klen/python-mode'
 " hex mode
 Plugin 'hexman.vim'
 Plugin 'Yggdroot/indentLine'
+" customizing any colorscheme
+Plugin 'AfterColors.vim'
 
 if has('win32')
 	"transparency windows vim (windows gvim)
