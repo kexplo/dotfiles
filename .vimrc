@@ -95,6 +95,9 @@ if has('win32')
 	Plugin 'mattn/transparency-windows-vim'
 endif
 
+" Vim JSX highlighting
+Plugin 'mxw/vim-jsx'
+
 call vundle#end()             " required!
 filetype plugin indent on     " required!
 "
@@ -252,3 +255,5 @@ nnoremap <F7> :PymodeLint<CR><CR>
 "z-z // move current line to the middle of the screen
 "z-t // move current line to the top of the screen
 "z-b // move current line to the bottom of the screen
+
+let g:jsx_ext_required = 0 "Allow JSX in normal JS files
