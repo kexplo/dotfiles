@@ -96,7 +96,7 @@ if has('win32')
 endif
 
 " Vim JSX highlighting
-Plugin 'mxw/vim-jsx'
+Plugin 'kexplo/vim-jsx'
 
 call vundle#end()             " required!
 filetype plugin indent on     " required!
@@ -257,3 +257,4 @@ nnoremap <F7> :PymodeLint<CR><CR>
 "z-b // move current line to the bottom of the screen
 
 let g:jsx_ext_required = 0 "Allow JSX in normal JS files
+let g:jsx_indent_disable = 1 "Disable vim-jsx Indent feature
