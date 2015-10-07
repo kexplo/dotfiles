@@ -88,6 +88,8 @@ Plugin 'hexman.vim'
 Plugin 'Yggdroot/indentLine'
 " customizing any colorscheme
 Plugin 'AfterColors.vim'
+" continuously updated session files
+Plugin 'tpope/vim-obsession'
 
 if has('win32')
 	"transparency windows vim (windows gvim)
