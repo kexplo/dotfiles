@@ -41,3 +41,7 @@ end
 
 # fix tmux coloring problem
 alias tmux="tmux -2"
+
+fundle plugin 'edc/bass'
+fundle plugin 'tuvistavie/oh-my-fish-core'
+fundle init
