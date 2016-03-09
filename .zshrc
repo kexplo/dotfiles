@@ -59,6 +59,8 @@ source $ZSH/oh-my-zsh.sh
 
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=yellow'
 
+ZSH_HIGHLIGHT_STYLES[default]='fg=cyan'
+
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
