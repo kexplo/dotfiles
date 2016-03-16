@@ -90,6 +90,8 @@ Plugin 'Yggdroot/indentLine'
 Plugin 'AfterColors.vim'
 " continuously updated session files
 Plugin 'tpope/vim-obsession'
+Plugin 'godlygeek/tabular'
+Plugin 'tpope/vim-surround'
 
 if has('win32')
 	"transparency windows vim (windows gvim)
