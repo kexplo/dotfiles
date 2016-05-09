@@ -61,6 +61,30 @@ export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=yellow'
 
 ZSH_HIGHLIGHT_STYLES[default]='fg=cyan'
 
+alias tmux='tmux -2'
+
+unsetopt AUTO_CD
+
+#F1 ^[OP
+#F2 ^[OQ
+#F3 ^[OR
+#F4 ^[OS
+#F5 ^[[15~
+#F6 ^[[17~
+#F7 ^[[18~
+#F8 ^[[19~
+#F9 ^[[20~
+#F10 ^[[21~
+#F11 ^[[23~
+#F12 ^[[24~
+
+# Bind keys: [Home] and [End].
+bindkey "\e[1~" beginning-of-line
+bindkey "\e[4~" end-of-line
+
+bindkey -s "\eOQ" PF2
+bindkey -s "\eOR" PF3
+
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
