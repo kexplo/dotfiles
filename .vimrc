@@ -1,9 +1,13 @@
+set nocompatible               " be iMproved
+" use softtab
+set noexpandtab
+
 "colorscheme evening
 colorscheme desert
 
 set fileencoding=utf-8
 set fileencodings=ucs-bom,utf-8,cp949,latin1
-set enc=utf-8
+set encoding=utf-8
 
 if has('win32')
 	language messages ko_kr.utf-8
@@ -15,31 +19,27 @@ else
 	endif
 endif
 
-"백스페이스 사용
+"use backspace
 set bs=indent,eol,start
 
-"탭 크기 설정
+"set tab size
 set tabstop=4
 set sw=4
+set sts=4
 
 "검색어 강조
 set hls
 
 "커서 위치 항상 표시
-set ru
+"set ru
 
 "파일 종류 자동 인식
-filet plugin indent on
+filetype plugin indent on
 
 "syntax highlight on
 syntax on
 
-"자동 들여쓰기
-set ai
-"똑똑한 들여쓰기
-set si
-"c 들여쓰기 사용안함
-set nocindent
+set autoindent
 
 "google protocol buffer
 au BufRead,BufNewFile *.proto set filetype=proto
@@ -50,72 +50,63 @@ if has('gui_running')
 	set guifont=consolas:h10
 endif
 
+" set status line always visible
 set laststatus=2
-"set statusline=%h%F%m%r%=[%l:%c(%p%%)]
-"set statusline=%<%F%h%m%r%h%w%y\ %{strftime(\"%Y/%m/%d-%H:%M\")}%=\ col:%c%V\ ascii:%b\ pos:%o\ lin:%l\,%L\ %P
-"set statusline=%<%F%w%h%m%r[%{&ff}/%Y][%{getcwd()}]%=(col:%c%V\ pos:%o\ line:%l\,%L\ %p%%)
 
-"======= settings for vundle ===================
-set nocompatible               " be iMproved
-filetype off                   " required!
+"======= plugins ==============================================================
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" vim-plug
+call plug#begin('~/.vim/plugged')
 
-" let Vundle manage Vundle
-" required! 
-Plugin 'gmarik/Vundle.vim'
+" Group dependencies, vim-snippets depends on ultisnips
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
-" php document for vim
-Plugin 'tobyS/pdv'
-" ultimate solution for snippets in Vim (integrates with YouCompleteMe)
-Plugin 'SirVer/ultisnips'
-" My Snippets
-Plugin 'kexplo/vim-snippets'
+" On-demend loading
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
-" a code-completion engine for Vim
-Plugin 'Valloric/YouCompleteMe'
-" syntax checking plugin for Vim
-Plugin 'Syntastic'
-Plugin 'pathogen.vim'
-Plugin 'taglist.vim'
-Plugin 'Command-T'
-Plugin 'Lokaltog/vim-powerline'
-Plugin 'scrooloose/nerdtree'
-Plugin 'klen/python-mode'
+"Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+Plug 'Valloric/YouCompleteMe'
+Plug 'scrooloose/syntastic'
+Plug 'taglist.vim'
+Plug 'Command-T'
+Plug 'Lokaltog/vim-powerline', { 'branch': 'develop' }
+Plug 'klen/python-mode', { 'for': 'python' }
+
 " hex mode
-Plugin 'hexman.vim'
-Plugin 'Yggdroot/indentLine'
+Plug 'hexman.vim'
+Plug 'Yggdroot/indentLine'
+
 " customizing any colorscheme
-Plugin 'AfterColors.vim'
+Plug 'AfterColors.vim'
+
 " continuously updated session files
-Plugin 'tpope/vim-obsession'
-Plugin 'godlygeek/tabular'
-Plugin 'tpope/vim-surround'
+Plug 'tpope/vim-obsession'
+Plug 'godlygeek/tabular'
+Plug 'tpope/vim-surround'
 
 if has('win32')
 	"transparency windows vim (windows gvim)
-	Plugin 'VimTweak'
-	Plugin 'mattn/transparency-windows-vim'
+	Plug 'VimTweak'
+	Plug 'mattn/transparency-windows-vim'
 endif
 
-" Vim JSX highlighting
-Plugin 'kexplo/vim-jsx'
+call plug#end()
 
-call vundle#end()             " required!
-filetype plugin indent on     " required!
-"
-" Brief help
-" :PluginList          - list configured bundles
-" :PluginInstall(!)    - install(update) bundles
-" :PluginSearch(!) foo - search(or refresh cache first) for foo
-" :PluginClean(!)      - confirm(or auto-approve) removal of unused bundles
-"
-" see :h vundle for more details or wiki for FAQ
-" NOTE: comments after Plugin command are not allowed..
+"==============================================================================
 
-" ========== ultinips settings =============
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+" Highlight excess line length (python)
+augroup vimrc_autocmds
+    autocmd!
+    " highlight characters past column 80 
+    autocmd FileType python highlight Excess ctermbg=DarkGrey guibg=Black
+    autocmd FileType python match Excess /\%81v.*/
+    autocmd FileType python set nowrap
+augroup END
+"set colorcolumn=81
+
+" -- ultisnips settings  ------------------------------------------------------
+" Trigger configuration.
+" Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<c-k>"
 let g:UltiSnipsJumpForwardTrigger="<c-l>"
 let g:UltiSnipsJumpBackwardTrigger="<c-j>"
@@ -123,34 +114,23 @@ let g:UltiSnipsJumpBackwardTrigger="<c-j>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
-let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/bundle/vim-snippets/UltiSnips']
+let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/plugged/vim-snippets/UltiSnips']
 
 " set python docstring style
 let g:ultisnips_python_style="sphinx"
 
-" ================
+" -- YCM settings  ------------------------------------------------------------
 
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf = 1
 let g:ycm_extra_conf_globlist = ['~/.vim/*']
-" ========== YcmCompleter subcommands =============
-" :YcmCompleter GoToDeclaration
-" :YcmCompleter GoToDefinition
-" :YcmCompleter GoToDefinitionElseDeclaration
-"
-" You may also want to map the subcommands to something less verbose; for
-" instance, nnoremap <leader>jd :YcmCompleter
-" GoToDefinitionElseDeclaration<CR> maps the <leader>jd sequence to the longer
-" subcommand invocation.
-"
-" The various GoTo* subcommands add entries to Vim's jumplist so you can use
-" CTRL-O to jump back to where you where before invoking the command (and
-" CTRL-I to jump forward; see :h jumplist for details).
 
-" ========== NerdTree setting =============
+" -- NerdTree settings  -------------------------------------------------------
+
 map <F2> :NERDTreeToggle<CR>
 
-" ========== python-mode settings =============
+" -- python-mode settings  ----------------------------------------------------
+
 " Python-mode
 " Activate rope
 " Keys:
@@ -199,15 +179,6 @@ let g:pymode_syntax_space_errors = g:pymode_syntax_all
 " Don't autofold code
 let g:pymode_folding = 0
 
-" == Highlight excess line length (python) == 
-augroup vimrc_autocmds
-    autocmd!
-    " highlight characters past column 80 
-    autocmd FileType python highlight Excess ctermbg=DarkGrey guibg=Black
-    autocmd FileType python match Excess /\%80v.*/
-    autocmd FileType python set nowrap
-augroup END
-
 " hexmap key mapping
 map <F6> <Plug>HexManager
 "<leader> hm	HexManager: Call/Leave Hexmode (using xxd) 
@@ -231,8 +202,6 @@ let g:indentLine_color_gui = '#A4E57E'
 "tab visualize
 set list lcs=tab:\|\ 
 
-"tab변환 사용안함.
-set noexpandtab
 "eol 추가 막기
 "set binary noeol
 
@@ -259,6 +228,3 @@ nnoremap <F7> :PymodeLint<CR><CR>
 "z-z // move current line to the middle of the screen
 "z-t // move current line to the top of the screen
 "z-b // move current line to the bottom of the screen
-
-let g:jsx_ext_required = 0 "Allow JSX in normal JS files
-let g:jsx_indent_disable = 1 "Disable vim-jsx Indent feature
