@@ -84,6 +84,9 @@ Plug 'tpope/vim-obsession'
 Plug 'godlygeek/tabular'
 Plug 'tpope/vim-surround'
 
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'tpope/vim-commentary'
+
 if has('win32')
 	"transparency windows vim (windows gvim)
 	Plug 'VimTweak'
@@ -228,3 +231,8 @@ nnoremap <F7> :PymodeLint<CR><CR>
 "z-z // move current line to the middle of the screen
 "z-t // move current line to the top of the screen
 "z-b // move current line to the bottom of the screen
+"
+"
+let g:ctrlp_custom_ignore = {
+  \ 'file': '\v\.(pyc|exe|so|dll)$',
+  \ }
