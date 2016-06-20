@@ -16,6 +16,8 @@ else
 	if &shell =~# 'fish$'
 		set shell=/bin/bash
 		set term=xterm-256color
+	elseif &shell =~# 'zsh$'
+		set term=xterm-256color
 	endif
 endif
 
