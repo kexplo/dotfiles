@@ -82,9 +82,6 @@ unsetopt AUTO_CD
 bindkey "\e[1~" beginning-of-line
 bindkey "\e[4~" end-of-line
 
-bindkey -s "\eOQ" PF2
-bindkey -s "\eOR" PF3
-
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
