@@ -82,20 +82,11 @@ Plug 'Yggdroot/indentLine'
 Plug 'AfterColors.vim'
 
 " continuously updated session files
-<<<<<<< 22fd4fdc95d25ad1d80a77d88d205f85ce8fcef1
 Plug 'tpope/vim-obsession'
 Plug 'godlygeek/tabular'
 Plug 'tpope/vim-surround'
-
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-commentary'
-=======
-Plugin 'tpope/vim-obsession'
-Plugin 'godlygeek/tabular'
-Plugin 'tpope/vim-surround'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'tpope/vim-commentary'
->>>>>>> update vim.rc
 
 if has('win32')
 	"transparency windows vim (windows gvim)
