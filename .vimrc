@@ -85,8 +85,10 @@ Plug 'AfterColors.vim'
 Plug 'tpope/vim-obsession'
 Plug 'godlygeek/tabular'
 Plug 'tpope/vim-surround'
+
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-commentary'
+Plug 'mileszs/ack.vim'
 
 if has('win32')
 	"transparency windows vim (windows gvim)
@@ -237,3 +239,12 @@ nnoremap <F7> :PymodeLint<CR><CR>
 let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(pyc|exe|so|dll)$',
   \ }
+
+" apt-get install silversearcher-ag
+" ack.vim + the_silver_searcher
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+  nnoremap <leader>aa :Ack!<Space>
+  nnoremap <leader>aw :Ack! --literal '<C-R><C-W>'<CR>
+  vnoremap <leader>av y:Ack! --literal '<C-R>"'<CR>
+endif
