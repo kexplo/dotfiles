@@ -67,6 +67,7 @@ Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
 "Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+Plug 'tpope/vim-sensible'
 Plug 'Valloric/YouCompleteMe'
 Plug 'scrooloose/syntastic'
 Plug 'taglist.vim'
