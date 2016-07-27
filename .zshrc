@@ -50,7 +50,7 @@ ZSH_THEME="kexplo"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting zsh-autosuggestions virtualenv)
+plugins=(git zsh-syntax-highlighting zsh-autosuggestions virtualenv zsh-navigation-tools)
 
 # User configuration
 
