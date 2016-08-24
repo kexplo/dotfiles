@@ -50,7 +50,7 @@ ZSH_THEME="kexplo"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting zsh-autosuggestions virtualenv zsh-navigation-tools)
+plugins=(git ssh-agent zsh-syntax-highlighting zsh-autosuggestions virtualenv zsh-navigation-tools)
 
 # User configuration
 
@@ -106,3 +106,4 @@ bindkey "\e[4~" end-of-line
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias kgit='LANG=ko_KR git'
