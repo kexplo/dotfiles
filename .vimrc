@@ -167,13 +167,7 @@ autocmd VimEnter *
 \|  map <F2> :NERDTreeToggle<CR>
 \|endif
 
-" python-mode
-autocmd VimEnter * call SetPymodeOptions()
-function SetPymodeOptions()
-  if !exists(':PymodePython')
-    return
-  endif
-  " Python-mode
+" python-mode {
   " Activate rope
   " Keys:
   " K             Show python docs
@@ -219,7 +213,7 @@ function SetPymodeOptions()
   
   " Don't autofold code
   let g:pymode_folding = 0
-endfunction
+" }
 
 
 " hexmap key mapping
