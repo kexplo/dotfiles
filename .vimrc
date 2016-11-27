@@ -280,3 +280,10 @@ if executable('ag')
   nnoremap <leader>aw :Ack! --literal '<C-R><C-W>'<CR>
   vnoremap <leader>av y:Ack! --literal '<C-R>"'<CR>
 endif
+
+" remove ESC delay (neovim)
+augroup FastESC
+  autocmd!
+  au InsertEnter * set ttimeoutlen=0
+  au InsertLeave * set ttimeoutlen=100
+augroup END
