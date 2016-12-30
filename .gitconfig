@@ -19,3 +19,5 @@
     ui = true
 [push]
     default = simple
+[diff]
+    compactionHeuristic = true
