@@ -16,7 +16,9 @@ Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
 "Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
-Plug 'tpope/vim-sensible'
+if !has('nvim')
+  Plug 'tpope/vim-sensible'
+endif
 Plug 'Valloric/YouCompleteMe' ", { 'do': './install.py' }
 Plug 'w0rp/ale'
 Plug 'taglist.vim'
@@ -83,12 +85,14 @@ set hls
 if has('win32')
   language messages ko_kr.utf-8
 else
-  "for fish shell
-  if &shell =~# 'fish$'
-    set shell=/bin/bash
-    set term=xterm-256color
-  elseif &shell =~# 'zsh$'
-    set term=xterm-256color
+  if !has('nvim')
+    "for fish shell
+    if &shell =~# 'fish$'
+      set shell=/bin/bash
+      set term=xterm-256color
+    elseif &shell =~# 'zsh$'
+      set term=xterm-256color
+    endif
   endif
 endif
 
@@ -296,3 +300,5 @@ augroup FastESC
   au InsertEnter * set ttimeoutlen=0
   au InsertLeave * set ttimeoutlen=100
 augroup END
+
+set mouse=v
