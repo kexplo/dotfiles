@@ -2,6 +2,8 @@
 " encoding 설정이 맨 위에 있어야 gvim에서 메뉴가 깨지지 않는다.
 set encoding=utf-8
 
+set noswapfile
+
 "======= plugins ==============================================================
 
 " vim-plug
