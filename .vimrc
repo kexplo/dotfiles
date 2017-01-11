@@ -49,6 +49,11 @@ endif
 
 Plug 'Glench/Vim-Jinja2-Syntax'
 
+" typescript
+Plug 'HerringtonDarkholme/yats.vim', { 'for': 'typescript' }
+Plug 'Shougo/vimproc.vim'
+" it enables 'tsuquyomi' typescript checker for syntastic
+Plug 'Quramy/tsuquyomi', { 'for': 'typescript' }  
 call plug#end()
 
 "==============================================================================
@@ -105,12 +110,16 @@ endif
 au! BufRead,BufNewFile *.proto setfiletype proto
 au FileType proto source $VIM\vimfiles\syntax\proto.vim
 
-" Filetype mappings
+" .md Filetype mappings
 au! BufRead,BufNewFile *.md setfiletype markdown
+
+" typescript filetype mappings
+au! BufRead,BufNewFile *.ts setfiletype typescript
 
 " tab/indent mappings
 au FileType cpp        setl ts=2 sw=2 sts=2
 au FileType javascript setl ts=2 sw=2 sts=2
+au FileType typescript setl ts=2 sw=2 sts=2
 
 " Highlight excess line length (python)
 augroup filetype_python
@@ -123,6 +132,12 @@ augroup filetype_python
   autocmd FileType python set expandtab
 augroup END
 
+" tsuquyomi
+autocmd VimEnter *
+\ if exists(':TsuReloadProject')
+\|  let g:tsuquyomi_disable_quickfix = 1
+\|endif
+
 " Syntastic
 autocmd VimEnter *
 \ if exists(':SyntasticCheck')
@@ -130,6 +145,7 @@ autocmd VimEnter *
 \|  let g:syntastic_python_checkers = ['flake8']
 \|  let g:syntastic_always_populate_loc_list = 1
 \|  let g:syntastic_sh_checkers = ['shellcheck']
+\|  let g:syntastic_typescript_checkers = ['tsuquyomi', 'tslint']
 \|endif
 
   " Trigger configuration.
