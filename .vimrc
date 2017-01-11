@@ -43,7 +43,7 @@ Plug 'tpope/vim-unimpaired'
 
 if has('win32')
   "transparency windows vim (windows gvim)
-  Plug 'VimTweak'
+  Plug 'kexplo/vimtweak'
   Plug 'mattn/transparency-windows-vim'
 endif
 
