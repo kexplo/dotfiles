@@ -107,3 +107,5 @@ bindkey "\e[4~" end-of-line
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias kgit='LANG=ko_KR git'
+export PATH="$HOME/.linuxbrew/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
