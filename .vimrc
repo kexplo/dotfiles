@@ -21,17 +21,17 @@ if !has('nvim')
 endif
 Plug 'Valloric/YouCompleteMe' ", { 'do': './install.py' }
 Plug 'w0rp/ale'
-Plug 'taglist.vim'
-Plug 'Command-T'
+Plug 'vim-scripts/taglist.vim'
+Plug 'vim-scripts/Command-T'
 Plug 'Lokaltog/vim-powerline', { 'branch': 'develop' }
 Plug 'klen/python-mode', { 'for': 'python' }
 
 " hex mode
-Plug 'hexman.vim'
+Plug 'vim-scripts/hexman.vim'
 Plug 'Yggdroot/indentLine'
 
 " customizing any colorscheme
-Plug 'AfterColors.vim'
+Plug 'vim-scripts/AfterColors.vim'
 
 " continuously updated session files
 Plug 'tpope/vim-obsession'
