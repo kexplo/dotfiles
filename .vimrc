@@ -26,6 +26,10 @@ Plug 'vim-scripts/Command-T'
 Plug 'Lokaltog/vim-powerline', { 'branch': 'develop' }
 Plug 'klen/python-mode', { 'for': 'python' }
 
+if has('nvim')
+  Plug 'kexplo/koach.nvim'
+endif
+
 " hex mode
 Plug 'vim-scripts/hexman.vim'
 Plug 'Yggdroot/indentLine'
