@@ -109,3 +109,4 @@ bindkey "\e[4~" end-of-line
 alias kgit='LANG=ko_KR git'
 export PATH="$HOME/.linuxbrew/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
+export LESS='-RXF'
