@@ -204,10 +204,10 @@ autocmd VimEnter *
   
   " Documentation
   let g:pymode_doc = 1
-  let g:pymode_doc_key = 'K'
+  " let g:pymode_doc_key = 'K'
   
   "Linting
-  let g:pymode_lint = 1
+  let g:pymode_lint = 0
   " Switch pylint, pyflakes, pep8, mccabe code-checkers
   let g:pymode_lint_checker = "pyflakes,pep8"
   " Auto check on save
@@ -272,6 +272,7 @@ set list lcs=tab:\|\
 nnoremap <F4> :TlistToggle<CR><CR>
 nnoremap <F12> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <F7> :PymodeLint<CR><CR>
+nnoremap <s-k> :YcmCompleter GetDoc<CR>
 
 "key memo
 "Ctrl-E, Ctrl-Y // up down scroll without moving the cursor
