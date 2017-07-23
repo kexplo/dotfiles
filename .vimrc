@@ -307,3 +307,4 @@ augroup FastESC
 augroup END
 
 set mouse=v
+set conceallevel=0  " disable the auto-hide double quotes in json
