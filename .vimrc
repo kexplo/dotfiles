@@ -253,6 +253,7 @@ map <F6> <Plug>HexManager
 let g:indentLine_char = '┆'
 let g:indentLine_color_term = 239
 let g:indentLine_color_gui = '#A4E57E'
+let g:indentLine_conceallevel = 0
 
 "tab visualize
 set list lcs=tab:\|\ 
