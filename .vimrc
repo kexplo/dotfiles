@@ -42,7 +42,7 @@ Plug 'tpope/vim-obsession'
 Plug 'godlygeek/tabular'
 Plug 'tpope/vim-surround'
 
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'junegunn/fzf'
 Plug 'tpope/vim-commentary'
 Plug 'mileszs/ack.vim'
 Plug 'tpope/vim-unimpaired'
@@ -274,6 +274,7 @@ nnoremap <F4> :TlistToggle<CR><CR>
 nnoremap <F12> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <F7> :PymodeLint<CR><CR>
 nnoremap <s-k> :YcmCompleter GetDoc<CR>
+nnoremap <c-P> :FZF<CR><CR>
 
 "key memo
 "Ctrl-E, Ctrl-Y // up down scroll without moving the cursor
@@ -287,9 +288,7 @@ nnoremap <s-k> :YcmCompleter GetDoc<CR>
 "z-b // move current line to the bottom of the screen
 "
 "
-let g:ctrlp_custom_ignore = {
-  \ 'file': '\v\.(pyc|exe|so|dll)$',
-  \ }
+
 
 " apt-get install silversearcher-ag
 " ack.vim + the_silver_searcher
