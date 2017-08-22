@@ -62,6 +62,7 @@ export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=yellow'
 ZSH_HIGHLIGHT_STYLES[default]='fg=cyan'
 
 alias tmux='tmux -2'
+alias fzf="fzf --preview 'head -100 {}'"
 
 unsetopt AUTO_CD
 
