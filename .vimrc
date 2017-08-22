@@ -299,6 +299,7 @@ if executable('ag')
   vnoremap <leader>av y:Ack! --literal '<C-R>"'<CR>
 endif
 
+let g:ale_python_mypy_options = '--py2 --ignore-missing-imports --follow-imports=skip'
 " remove ESC delay (neovim)
 augroup FastESC
   autocmd!
