@@ -43,6 +43,7 @@ Plug 'godlygeek/tabular'
 Plug 'tpope/vim-surround'
 
 Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-commentary'
 Plug 'mileszs/ack.vim'
 Plug 'tpope/vim-unimpaired'
@@ -274,7 +275,23 @@ nnoremap <F4> :TlistToggle<CR><CR>
 nnoremap <F12> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <F7> :PymodeLint<CR><CR>
 nnoremap <s-k> :YcmCompleter GetDoc<CR>
-nnoremap <c-P> :FZF<CR><CR>
+nnoremap <C-P> :call fzf#vim#files('', fzf#vim#with_preview('right'))<CR><CR>
+if executable('rg')
+  command! -bang -nargs=* Rg
+        \ call fzf#vim#grep('rg ' .
+        \   '--color=always ' .
+        \   '--glob "!.git/*" ' .
+        \   '--ignore-case ' .
+        \   '--line-number ' .
+        \   '--column ' .
+        \   '--no-heading ' .
+        \   '--hidden ' .
+        \   '--ignore-file=~/.gitignore ' .
+        \   '--follow ' .
+        \   <q-args>, 1,
+        \   fzf#vim#with_preview('right:50%'),
+        \   <bang>0)
+endif
 
 "key memo
 "Ctrl-E, Ctrl-Y // up down scroll without moving the cursor
