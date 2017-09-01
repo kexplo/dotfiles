@@ -286,7 +286,7 @@ if executable('rg')
         \   '--column ' .
         \   '--no-heading ' .
         \   '--hidden ' .
-        \   '--ignore-file=~/.gitignore ' .
+        \   '--ignore-file=.gitignore ' .
         \   '--follow ' .
         \   <q-args>, 1,
         \   fzf#vim#with_preview('right:50%'),
