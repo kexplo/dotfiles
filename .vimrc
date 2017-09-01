@@ -309,7 +309,12 @@ endif
 
 " apt-get install silversearcher-ag
 " ack.vim + the_silver_searcher
-if executable('ag')
+if executable('rg')
+  let g:ackprg = 'rg --vimgrep --no-heading'
+  nnoremap <leader>aa :Ack!<Space>
+  nnoremap <leader>aw :Ack! '<C-R><C-W>'<CR>
+  vnoremap <leader>av y:Ack! '<C-R>"'<CR>
+elseif executable('ag')
   let g:ackprg = 'ag --vimgrep'
   nnoremap <leader>aa :Ack!<Space>
   nnoremap <leader>aw :Ack! --literal '<C-R><C-W>'<CR>
