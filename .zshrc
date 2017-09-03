@@ -65,6 +65,8 @@ alias tmux='tmux -2'
 alias fzf="fzf --preview 'head -100 {}'"
 
 unsetopt AUTO_CD
+# Prevent closing the terminal using ^D
+setopt ignoreeof
 
 #F1 ^[OP
 #F2 ^[OQ
