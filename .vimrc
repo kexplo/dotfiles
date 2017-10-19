@@ -21,10 +21,12 @@ if !has('nvim')
 endif
 Plug 'Valloric/YouCompleteMe' ", { 'do': './install.py' }
 Plug 'w0rp/ale'
-Plug 'vim-scripts/taglist.vim'
+Plug 'majutsushi/tagbar'
 Plug 'vim-scripts/Command-T'
 Plug 'Lokaltog/vim-powerline', { 'branch': 'develop' }
 Plug 'klen/python-mode', { 'for': 'python' }
+Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-sleuth'
 
 if has('nvim')
   Plug 'kexplo/koach.nvim'
@@ -254,7 +256,14 @@ map <F6> <Plug>HexManager
 let g:indentLine_char = '┆'
 let g:indentLine_color_term = 239
 let g:indentLine_color_gui = '#A4E57E'
-let g:indentLine_conceallevel = 0
+
+augroup except_slow_filetypes
+  autocmd!
+  autocmd FileType * let g:indentLine_enabled = 1
+  autocmd FileType * let g:indentLine_setConceal = 1
+  autocmd FileType json,yaml let g:indentLine_enabled = 0
+  autocmd FileType json,yaml let g:indentLine_setConceal = 0
+augroup END
 
 "tab visualize
 set list lcs=tab:\|\ 
@@ -322,6 +331,8 @@ elseif executable('ag')
 endif
 
 let g:ale_python_mypy_options = '--py2 --ignore-missing-imports --follow-imports=skip'
+" let g:ale_python_mypy_options = '--py2 --ignore-missing-imports'
+
 " remove ESC delay (neovim)
 augroup FastESC
   autocmd!
