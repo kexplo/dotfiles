@@ -188,6 +188,12 @@ autocmd VimEnter *
 \|  map <F2> :NERDTreeToggle<CR>
 \|endif
 
+" Tagbar
+autocmd VimEnter *
+\ if exists(':TagbarToggle')
+\|  map <F3> :TagbarToggle<CR>
+\|endif
+
 " python-mode {
   " Activate rope
   " Keys:
