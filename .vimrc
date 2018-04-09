@@ -244,7 +244,7 @@ autocmd VimEnter *
 
 
 " hexmap key mapping
-map <F6> <Plug>HexManager
+" map <F6> <Plug>HexManager
 "<leader> hm    HexManager: Call/Leave Hexmode (using xxd) 
 "<leader> hd    HexDelete: delete hex character under cursor 
 "<leader> hi    HexInsert: Insert Ascii character before cursor 
