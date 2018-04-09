@@ -10,15 +10,35 @@ _fishy_collapsed_wd() {
 ')
 }
 
-local user_color='green'; [ $UID -eq 0 ] && user_color='red'
-# PROMPT='%n@%m %{$fg[$user_color]%}$(_fishy_collapsed_wd)%{$reset_color%}%(!.#.>) '
-PROMPT2='%{$fg[red]%}\ %{$reset_color%}'
+PROMPT2="%{$fg[red]%}\ %{$reset_color%}"
 
 # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
 
-local return_status="%{$fg_bold[red]%}%(?..%?)%{$reset_color%}"
-#RPROMPT='${return_status}$(git_prompt_info)$(git_prompt_status)%{$reset_color%}'
-PROMPT='$(virtualenv_prompt_info)%n@%m:%{$fg[$user_color]%}$(_fishy_collapsed_wd)%{$reset_color%}%{$fg[yellow]%}$(git_prompt_info)%{$reset_color%}%(!.#.$) '
+prompt_venv() {
+  echo -n "$(virtualenv_prompt_info)"
+}
+
+prompt_user() {
+  local user_color='green'; [ $UID -eq 0 ] && user_color='red'
+  echo -n "%n@%m:%{$fg[$user_color]%}"
+}
+
+prompt_path() {
+  echo -n "$(_fishy_collapsed_wd)%{$reset_color%}"
+}
+
+prompt_git() {
+  echo -n "%{$fg[yellow]%}$(git_prompt_info)%{$reset_color%}%(!.#.$)"
+}
+
+build_prompt() {
+  prompt_venv
+  prompt_user
+  prompt_path
+  prompt_git
+}
+
+PROMPT='$(build_prompt) '
 
 ZSH_THEME_GIT_PROMPT_PREFIX=":"
 ZSH_THEME_GIT_PROMPT_SUFFIX=""
@@ -40,7 +60,10 @@ start-timer() {
   COMMAND_TIMER="$SECONDS"
 }
 stop-timer-rprompt() {
-  RPROMPT='${return_status}%{$reset_color%} '
+  local return_status="%{$fg_bold[red]%}%(?..%?)%{$reset_color%}"
+
+  #RPROMPT='${return_status}$(git_prompt_info)$(git_prompt_status)%{$reset_color%}'
+  RPROMPT="${return_status}%{$reset_color%} "
   if [[ -z "$COMMAND_TIMER" ]]
   then
     return
@@ -64,4 +87,4 @@ stop-timer-rprompt() {
   fi
 }
 add-zsh-hook preexec start-timer
-add-zsh-hook precmd  stop-timer-rprompt
+add-zsh-hook precmd stop-timer-rprompt
