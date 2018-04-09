@@ -3,6 +3,7 @@
 source ~/.zplug/init.zsh
 
 zplug "lib/theme-and-appearance", from:oh-my-zsh
+zplug "lib/completion", from:oh-my-zsh
 zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/ssh-agent", from:oh-my-zsh
 zplug "plugins/virtualenv", from:oh-my-zsh
