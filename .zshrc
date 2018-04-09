@@ -84,6 +84,13 @@ alias fzf="fzf --preview 'head -100 {}'"
 bindkey "\e[1~" beginning-of-line
 bindkey "\e[4~" end-of-line
 
+# Bind history-substring-search
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+# Inside tmux
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
+
 alias kgit='LANG=ko_KR git'
 export PATH="$HOME/.linuxbrew/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
