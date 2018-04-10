@@ -100,7 +100,7 @@ export PATH="$PATH:/usr/local/go/bin"
 export LESS='-RXF'
 
 # pipsi
-export PATH=/home/kexplo/.local/bin:$PATH
+export PATH="$HOME/.local/bin:$PATH"
 
 # pyenv
 export PATH="$HOME/.pyenv/bin:$PATH"
