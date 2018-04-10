@@ -110,3 +110,6 @@ eval "$(pyenv virtualenv-init -)"
 # autoenv
 source "$HOME/.autoenv/activate.sh"
 # export AUTOENV_ENABLE_LEAVE=1
+
+# z
+. "$HOME"/.linuxbrew/etc/profile.d/z.sh
