@@ -113,4 +113,4 @@ source "$HOME/.autoenv/activate.sh"
 # export AUTOENV_ENABLE_LEAVE=1
 
 # z
-. "$HOME"/.linuxbrew/etc/profile.d/z.sh
+source "$(brew --prefix)/etc/profile.d/z.sh"
