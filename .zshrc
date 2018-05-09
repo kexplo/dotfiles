@@ -63,7 +63,11 @@ export HISTFILE="$HOME/.zsh_history"
 export HISTSIZE=10000
 export SAVEHIST=10000
 
-alias ls='ls --color=tty'
+if is_osx; then
+  alias ls='ls -G'
+else
+  alias ls='ls --color=tty'
+fi
 alias l='ls'
 
 alias tmux='tmux -2'
