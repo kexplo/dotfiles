@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-source ~/.zplug/init.zsh
+source "$HOME/.zplug/init.zsh"
 
 zplug "lib/theme-and-appearance", from:oh-my-zsh
 zplug "lib/completion", from:oh-my-zsh
@@ -58,7 +58,7 @@ ZSH_HIGHLIGHT_STYLES[default]='fg=cyan'
 
 autoload -U colors && colors
 
-export HISTFILE=~/.zsh_history
+export HISTFILE="$HOME/.zsh_history"
 export HISTSIZE=10000
 export SAVEHIST=10000
 
