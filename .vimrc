@@ -4,6 +4,10 @@ set encoding=utf-8
 
 set noswapfile
 
+if has('nvim')
+    let g:loaded_ruby_provider = 1
+endif
+
 "======= plugins ==============================================================
 
 " vim-plug
