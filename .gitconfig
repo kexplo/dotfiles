@@ -4,7 +4,6 @@
 [core]
     autocrlf = false
     whitespace = trailing-space
-    editor = /usr/bin/vim
     # -X: no screen clear when exit.
     # -R: 
     pager = less -R -X -e
