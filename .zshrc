@@ -113,9 +113,8 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
-# autoenv
-source "$HOME/.autoenv/activate.sh"
-# export AUTOENV_ENABLE_LEAVE=1
+# direnv
+eval "$(direnv hook zsh)"
 
 # z
 source "$(brew --prefix)/etc/profile.d/z.sh"
