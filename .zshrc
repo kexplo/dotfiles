@@ -1,5 +1,6 @@
 #!/usr/bin/env zsh
 
+source "$HOME/stdlib.sh"
 source "$HOME/.zplug/init.zsh"
 
 zplug "lib/theme-and-appearance", from:oh-my-zsh
