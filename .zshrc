@@ -98,11 +98,16 @@ bindkey "$terminfo[kcuu1]" history-substring-search-up
 bindkey "$terminfo[kcud1]" history-substring-search-down
 
 alias kgit='LANG=ko_KR git'
-export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
 export PATH="$PATH:/usr/local/go/bin"
 export LESS='-RXF'
+
+# Linuxbrew
+export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+export MANPATH="/home/linuxbrew/.linuxbrew/share/man:$MANPATH"
+export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:$INFOPATH"
 
 # pipsi
 export PATH="$HOME/.local/bin:$PATH"
