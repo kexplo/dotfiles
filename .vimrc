@@ -147,6 +147,14 @@ augroup filetype_python
   autocmd FileType python set expandtab
 augroup END
 
+augroup filetype_go
+  autocmd!
+  autocmd FileType go set noexpandtab
+  autocmd FileType go set shiftwidth=4
+  autocmd FileType go set softtabstop=4
+  autocmd FileType go set tabstop=4
+augroup END
+
 " tsuquyomi
 autocmd VimEnter *
 \ if exists(':TsuReloadProject')
