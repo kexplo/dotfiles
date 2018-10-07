@@ -1,6 +1,6 @@
 [user]
     name = Chanwoong Kim
-    email = chanwoong@chanwoong.kim
+    email = me@chanwoong.kim
 [core]
     autocrlf = false
     whitespace = trailing-space
