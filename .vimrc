@@ -289,9 +289,9 @@ set list lcs=tab:\|\
 "eol 추가 막기
 "set binary noeol
 
-" insert current timestamp
-"nmap <F5> a<C-R>=strftime("%Y-%m-%d %I:%M:%S")<CR><Esc>
-"imap <F5> <C-R>=strftime("%Y-%m-%d %I:%M:%S")<CR>
+" insert current datetime
+nmap <F5> a<C-R>=strftime("%Y-%m-%d %I:%M:%S")<CR><Esc>
+imap <F5> <C-R>=strftime("%Y-%m-%d %I:%M:%S")<CR>
 
 "cpp, h switch
 " :e %<.cpp
