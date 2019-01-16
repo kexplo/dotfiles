@@ -21,3 +21,7 @@
     default = simple
 [diff]
     compactionHeuristic = true
+[pager]
+    log = ~/rc/diff-highlight | less -R -X -e
+    show = ~/rc/diff-highlight | less -R -X -e
+    diff = ~/rc/diff-highlight | less -R -X -e
