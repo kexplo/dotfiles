@@ -72,6 +72,7 @@ alias l='ls'
 
 alias tmux='tmux -2'
 alias fzf="fzf --preview 'head -100 {}'"
+alias rg='rg --hidden'
 
 #F1 ^[OP
 #F2 ^[OQ
