@@ -297,12 +297,11 @@ imap <F5> <C-R>=strftime("%Y-%m-%d %I:%M:%S")<CR>
 " :e %<.cpp
 " :e %<.h
 "
-" Key mappings
-nnoremap <F4> :TlistToggle<CR><CR>
-nnoremap <F12> :YcmCompleter GoToDefinitionElseDeclaration<CR>
-nnoremap <F7> :PymodeLint<CR><CR>
-nnoremap <s-k> :YcmCompleter GetDoc<CR>
-nnoremap <C-P> :call fzf#vim#files('', fzf#vim#with_preview('right'))<CR><CR>
+
+" FZF
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview('right'), <bang>0)
+
 if executable('rg')
   command! -bang -nargs=* Rg
         \ call fzf#vim#grep('rg ' .
@@ -314,11 +313,18 @@ if executable('rg')
         \   '--no-heading ' .
         \   '--hidden ' .
         \   '--ignore-file=.gitignore ' .
-        \   '--follow ' .
-        \   <q-args>, 1,
+        \   '--follow '.shellescape(<q-args>), 1,
         \   fzf#vim#with_preview('right:50%'),
         \   <bang>0)
 endif
+
+" Key mappings
+nnoremap <F4> :TlistToggle<CR><CR>
+nnoremap <F12> :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <F7> :PymodeLint<CR><CR>
+nnoremap <s-k> :YcmCompleter GetDoc<CR>
+" call fzf.vim Files
+nnoremap <C-P> :Files<CR>
 
 "key memo
 "Ctrl-E, Ctrl-Y // up down scroll without moving the cursor
