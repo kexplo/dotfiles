@@ -5,7 +5,7 @@ set encoding=utf-8
 set noswapfile
 
 if has('nvim')
-    let g:loaded_ruby_provider = 1
+  let g:loaded_ruby_provider = 1
 endif
 
 "======= plugins ==============================================================
@@ -66,7 +66,7 @@ Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'HerringtonDarkholme/yats.vim', { 'for': 'typescript' }
 Plug 'Shougo/vimproc.vim'
 " it enables 'tsuquyomi' typescript checker for syntastic
-Plug 'Quramy/tsuquyomi', { 'for': 'typescript' }  
+Plug 'Quramy/tsuquyomi', { 'for': 'typescript' }
 call plug#end()
 
 "==============================================================================
@@ -121,25 +121,41 @@ endif
 "파일 종류 자동 인식
 "filetype plugin indent on
 
+augroup vimrc
+  autocmd!
+augroup END
+
 "google protocol buffer
-au! BufRead,BufNewFile *.proto setfiletype proto
-au FileType proto source $VIM\vimfiles\syntax\proto.vim
+augroup filetype_proto
+  autocmd!
+  autocmd BufRead,BufNewFile *.proto setfiletype proto
+  autocmd FileType proto source $VIM\vimfiles\syntax\proto.vim
+augroup END
 
 " .md Filetype mappings
-au! BufRead,BufNewFile *.md setfiletype markdown
+augroup filetype_markdown
+  autocmd!
+  autocmd BufRead,BufNewFile *.md setfiletype markdown
+augroup END
 
 " typescript filetype mappings
-au! BufRead,BufNewFile *.ts setfiletype typescript
+augroup filetype_typescript
+  autocmd!
+  autocmd BufRead,BufNewFile *.ts setfiletype typescript
+augroup END
 
 " tab/indent mappings
-au FileType cpp        setl ts=2 sw=2 sts=2
-au FileType javascript setl ts=2 sw=2 sts=2
-au FileType typescript setl ts=2 sw=2 sts=2
+augroup indent_mappings
+  autocmd!
+  autocmd FileType cpp        setl ts=2 sw=2 sts=2
+  autocmd FileType javascript setl ts=2 sw=2 sts=2
+  autocmd FileType typescript setl ts=2 sw=2 sts=2
+augroup END
 
 " Highlight excess line length (python)
 augroup filetype_python
   autocmd!
-  " highlight characters past column 80 
+  " highlight characters past column 80
   autocmd FileType python highlight Excess ctermbg=DarkGrey guibg=Black
   autocmd FileType python match Excess /\%81v.*/
   autocmd FileType python set nowrap
@@ -156,7 +172,7 @@ augroup filetype_go
 augroup END
 
 " tsuquyomi
-autocmd VimEnter *
+autocmd vimrc VimEnter *
 \ if exists(':TsuReloadProject')
 \|  let g:tsuquyomi_disable_quickfix = 1
 \|endif
@@ -165,8 +181,7 @@ autocmd VimEnter *
   " Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 
 " UltiSnips
-autocmd VimEnter * call SetUltisnipsOptions()
-function SetUltisnipsOptions()
+function! s:set_ultisnip_options()
   if !exists(':UltiSnipsEdit')
     return
   endif
@@ -175,18 +190,20 @@ function SetUltisnipsOptions()
   let g:UltiSnipsExpandTrigger="<c-k>"
   let g:UltiSnipsJumpForwardTrigger="<c-l>"
   let g:UltiSnipsJumpBackwardTrigger="<c-j>"
-  
+
   " If you want :UltiSnipsEdit to split your window.
   let g:UltiSnipsEditSplit="vertical"
-  
+
   let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/plugged/vim-snippets/UltiSnips']
-  
+
   " set python docstring style
   let g:ultisnips_python_style="sphinx"
 endfunction
+autocmd vimrc VimEnter * call s:set_ultisnip_options()
+
 
 " YouCompleteMe
-autocmd VimEnter *
+autocmd vimrc VimEnter *
 \ if exists('g:ycm_goto_buffer_command')
 \|  let g:ycm_goto_buffer_command = 'new-tab'
 \|  let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
@@ -195,24 +212,26 @@ autocmd VimEnter *
 \|endif
 
 " NerdTree
-autocmd VimEnter *
+autocmd vimrc VimEnter *
 \ if exists(':NERDTreeToggle')
 \|  map <F2> :NERDTreeToggle<CR>
 \|endif
 
 " Tagbar
-autocmd VimEnter *
+autocmd vimrc VimEnter *
 \ if exists(':TagbarToggle')
 \|  map <F3> :TagbarToggle<CR>
 \|endif
 
 " ALE
-autocmd VimEnter * call SetALEOptions()
-function SetALEOptions()
+function! s:set_ale_options()
   let g:ale_python_mypy_options = '--py2 --ignore-missing-imports --follow-imports=skip'
   " let g:ale_python_mypy_options = '--py2 --ignore-missing-imports'
 endfunction
+autocmd vimrc VimEnter * call s:set_ale_options()
 
+"python-mode
+function! s:set_pymode_options()
 " python-mode {
   " Activate rope
   " Keys:
@@ -226,14 +245,14 @@ endfunction
   " ]]            Jump on next class or function (normal, visual, operator modes)
   " [M            Jump on previous class or method (normal, visual, operator modes)
   " ]M            Jump on next class or method (normal, visual, operator modes)
+  let g:pymode_abc = 0
   let g:pymode_rope = 0
   "disable run python code
-  let g:pymode_run = 0 
-  
+  let g:pymode_run = 0
+
   " Documentation
   let g:pymode_doc = 1
-  " let g:pymode_doc_key = 'K'
-  
+
   "Linting
   let g:pymode_lint = 0
   " Switch pylint, pyflakes, pep8, mccabe code-checkers
@@ -243,35 +262,34 @@ endfunction
   " Skip errors and warnings
   " E.g. "E501,W002"
   let g:pymode_lint_ignore = "W191"
-  
+
   " Support virtualenv
   let g:pymode_virtualenv = 1
-  
+
   " Enable breakpoints plugin
   let g:pymode_breakpoint = 1
   let g:pymode_breakpoint_key = '<leader>b'
-  
+
   " syntax highlighting
   let g:pymode_syntax = 1
   let g:pymode_syntax_all = 1
-  let g:pymode_syntax_indent_errors = g:pymode_syntax_all
-  let g:pymode_syntax_space_errors = g:pymode_syntax_all
-  
+
   " Don't autofold code
   let g:pymode_folding = 0
 " }
-
+endfunction
+autocmd vimrc VimEnter * call s:set_pymode_options()
 
 " hexmap key mapping
 " map <F6> <Plug>HexManager
-"<leader> hm    HexManager: Call/Leave Hexmode (using xxd) 
-"<leader> hd    HexDelete: delete hex character under cursor 
-"<leader> hi    HexInsert: Insert Ascii character before cursor 
-"<leader> hg    HexGoto: Goto hex offset. 
-"<leader> hn    HexNext: Goto next hex offset. 
-"<leader> hp    HexPrev: Goto previous hex offset. 
-"<leader> hs    HexStatus: Show / Hide hexoffset infos in statusline 
-"                         and related ascii column 
+"<leader> hm    HexManager: Call/Leave Hexmode (using xxd)
+"<leader> hd    HexDelete: delete hex character under cursor
+"<leader> hi    HexInsert: Insert Ascii character before cursor
+"<leader> hg    HexGoto: Goto hex offset.
+"<leader> hn    HexNext: Goto next hex offset.
+"<leader> hp    HexPrev: Goto previous hex offset.
+"<leader> hs    HexStatus: Show / Hide hexoffset infos in statusline
+"                         and related ascii column
 
 " Taglist Cmd
 " :TlistToggle  open/close the taglist window.
@@ -291,7 +309,7 @@ augroup except_slow_filetypes
 augroup END
 
 "tab visualize
-set list lcs=tab:\|\ 
+set list lcs=tab:\|\
 
 "eol 추가 막기
 "set binary noeol
@@ -346,7 +364,6 @@ nnoremap <C-P> :Files<CR>
 "
 "
 
-
 " apt-get install silversearcher-ag
 " ack.vim + the_silver_searcher
 if executable('rg')
@@ -362,10 +379,10 @@ elseif executable('ag')
 endif
 
 " remove ESC delay (neovim)
-augroup FastESC
+augroup fast_esc
   autocmd!
-  au InsertEnter * set ttimeoutlen=0
-  au InsertLeave * set ttimeoutlen=100
+  autocmd InsertEnter * set ttimeoutlen=0
+  autocmd InsertLeave * set ttimeoutlen=100
 augroup END
 
 set mouse=v
