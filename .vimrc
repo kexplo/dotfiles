@@ -303,7 +303,7 @@ let g:indentLine_color_gui = '#A4E57E'
 augroup except_slow_filetypes
   autocmd!
   autocmd FileType * let g:indentLine_enabled = 1
-  autocmd FileType * let g:indentLine_setConceal = 1
+  autocmd FileType * let g:indentLine_setConceal = 0
   autocmd FileType json,yaml let g:indentLine_enabled = 0
   autocmd FileType json,yaml let g:indentLine_setConceal = 0
 augroup END
