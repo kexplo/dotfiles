@@ -25,7 +25,7 @@ if !has('nvim')
 endif
 Plug 'Valloric/YouCompleteMe' ", { 'do': './install.py' }
 Plug 'w0rp/ale'
-Plug 'majutsushi/tagbar'
+Plug 'majutsushi/tagbar'  " ctags required
 " Plug 'Lokaltog/vim-powerline', { 'branch': 'develop' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
