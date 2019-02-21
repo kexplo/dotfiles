@@ -37,7 +37,6 @@ if has('nvim')
   Plug 'kexplo/koach.nvim'
 endif
 
-" hex mode
 Plug 'vim-scripts/hexman.vim'
 Plug 'Yggdroot/indentLine'
 
@@ -46,6 +45,7 @@ Plug 'vim-scripts/AfterColors.vim'
 
 " continuously updated session files
 Plug 'tpope/vim-obsession'
+
 Plug 'godlygeek/tabular'
 Plug 'tpope/vim-surround'
 
@@ -68,6 +68,7 @@ Plug 'HerringtonDarkholme/yats.vim', { 'for': 'typescript' }
 Plug 'Shougo/vimproc.vim'
 " it enables 'tsuquyomi' typescript checker for syntastic
 Plug 'Quramy/tsuquyomi', { 'for': 'typescript' }
+
 call plug#end()
 
 "==============================================================================
