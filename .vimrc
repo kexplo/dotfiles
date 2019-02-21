@@ -206,6 +206,13 @@ autocmd VimEnter *
 \|  map <F3> :TagbarToggle<CR>
 \|endif
 
+" ALE
+autocmd VimEnter * call SetALEOptions()
+function SetALEOptions()
+  let g:ale_python_mypy_options = '--py2 --ignore-missing-imports --follow-imports=skip'
+  " let g:ale_python_mypy_options = '--py2 --ignore-missing-imports'
+endfunction
+
 " python-mode {
   " Activate rope
   " Keys:
@@ -353,9 +360,6 @@ elseif executable('ag')
   nnoremap <leader>aw :Ack! --literal '<C-R><C-W>'<CR>
   vnoremap <leader>av y:Ack! --literal '<C-R>"'<CR>
 endif
-
-let g:ale_python_mypy_options = '--py2 --ignore-missing-imports --follow-imports=skip'
-" let g:ale_python_mypy_options = '--py2 --ignore-missing-imports'
 
 " remove ESC delay (neovim)
 augroup FastESC
