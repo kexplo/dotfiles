@@ -112,6 +112,9 @@ endif
 "syntax highlight on
 syntax on
 
+" disable folding as default
+set nofoldenable
+
 if has('gui_running')
   "set gvim font
   set guifont=consolas:h10
