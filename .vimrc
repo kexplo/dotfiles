@@ -313,7 +313,9 @@ augroup except_slow_filetypes
 augroup END
 
 "tab visualize
-set list lcs=tab:\|\
+set list lcs=tab:\|·
+" set list lcs=tab:\|\
+" :set listchars=eol:⏎,tab:␉·,trail:␠,nbsp:⎵
 
 "eol 추가 막기
 "set binary noeol
