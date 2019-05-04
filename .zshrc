@@ -54,6 +54,11 @@ setopt noflowcontrol
 
 ############################################################################################
 
+# Edit current command line
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '\C-x\C-e' edit-command-line
+
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=yellow'
 ZSH_HIGHLIGHT_STYLES[default]='fg=cyan'
 
