@@ -11,6 +11,7 @@ _fishy_collapsed_wd() {
 }
 
 PROMPT2="%{$fg[red]%}\ %{$reset_color%}"
+EXEC_TIMER_PROMPT=""
 
 # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
 
@@ -31,11 +32,26 @@ prompt_git() {
   echo -n "%{$fg[yellow]%}$(git_prompt_info)%{$reset_color%}%(!.#.$)"
 }
 
+prompt_time() {
+  echo -n " %{$fg_bold[gray]%}[%*]%{$reset_color%}"
+}
+
+prompt_return_status() {
+  echo -n " %{$fg_bold[red]%}%(?..%?)%{$reset_color%} ${EXEC_TIMER_PROMPT}"
+}
+
+prompt_shell() {
+  echo -n '\n%(!.#.$)'
+}
+
 build_prompt() {
   prompt_venv
   prompt_user
   prompt_path
   prompt_git
+  prompt_time
+  prompt_return_status
+  prompt_shell
 }
 
 PROMPT='$(build_prompt) '
@@ -63,7 +79,7 @@ stop-timer-rprompt() {
   local return_status="%{$fg_bold[red]%}%(?..%?)%{$reset_color%}"
 
   #RPROMPT='${return_status}$(git_prompt_info)$(git_prompt_status)%{$reset_color%}'
-  RPROMPT="${return_status}%{$reset_color%} "
+  # RPROMPT="${return_status}%{$reset_color%} "
   if [[ -z "$COMMAND_TIMER" ]]
   then
     return
@@ -76,14 +92,17 @@ stop-timer-rprompt() {
   if [[ "$elapsed" -lt 3 ]]
   then
     # ~3sec: show nothing
+    EXEC_TIMER_PROMPT=""
     return
   elif [[ "$elapsed" -lt 600 ]]
   then
     # 3sec~10min: ↳42sec (yellow)
-    RPROMPT+="%F{yellow}↳%S${elapsed}sec%s%f"
+    # RPROMPT+="%F{yellow}↳%S${elapsed}sec%s%f"
+    EXEC_TIMER_PROMPT="%F{yellow}↳%S${elapsed}sec%s%f"
   else
     # 10min~: ↳23min (red)
-    RPROMPT+="%F{red}↳%S$((elapsed/60))min%s%f"
+    # RPROMPT+="%F{red}↳%S$((elapsed/60))min%s%f"
+    EXEC_TIMER_PROMPT="%F{yellow}↳%S${elapsed}sec%s%f"
   fi
 }
 add-zsh-hook preexec start-timer
