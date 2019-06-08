@@ -65,8 +65,6 @@ Plug 'Glench/Vim-Jinja2-Syntax'
 " typescript
 Plug 'HerringtonDarkholme/yats.vim', { 'for': 'typescript' }
 Plug 'Shougo/vimproc.vim'
-" it enables 'tsuquyomi' typescript checker for syntastic
-Plug 'Quramy/tsuquyomi', { 'for': 'typescript' }
 
 call plug#end()
 
@@ -174,36 +172,6 @@ augroup filetype_go
   autocmd FileType go set softtabstop=4
   autocmd FileType go set tabstop=4
 augroup END
-
-" tsuquyomi
-autocmd vimrc VimEnter *
-\ if exists(':TsuReloadProject')
-\|  let g:tsuquyomi_disable_quickfix = 1
-\|endif
-
-  " Trigger configuration.
-  " Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-
-" UltiSnips
-function! s:set_ultisnip_options()
-  if !exists(':UltiSnipsEdit')
-    return
-  endif
-  " Trigger configuration.
-  " Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-  let g:UltiSnipsExpandTrigger="<c-k>"
-  let g:UltiSnipsJumpForwardTrigger="<c-l>"
-  let g:UltiSnipsJumpBackwardTrigger="<c-j>"
-
-  " If you want :UltiSnipsEdit to split your window.
-  let g:UltiSnipsEditSplit="vertical"
-
-  let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/plugged/vim-snippets/UltiSnips']
-
-  " set python docstring style
-  let g:ultisnips_python_style="sphinx"
-endfunction
-autocmd vimrc VimEnter * call s:set_ultisnip_options()
 
 
 " YouCompleteMe
