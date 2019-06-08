@@ -29,7 +29,6 @@ Plug 'majutsushi/tagbar'  " ctags required
 " Plug 'Lokaltog/vim-powerline', { 'branch': 'develop' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'klen/python-mode', { 'for': 'python' }
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-sleuth'
 
@@ -234,55 +233,6 @@ function! s:set_ale_options()
   " let g:ale_python_mypy_options = '--py2 --ignore-missing-imports'
 endfunction
 autocmd vimrc VimEnter * call s:set_ale_options()
-
-"python-mode
-function! s:set_pymode_options()
-" python-mode {
-  " Activate rope
-  " Keys:
-  " K             Show python docs
-  " <Ctrl-Space>  Rope autocomplete
-  " <Ctrl-c>g     Rope goto definition
-  " <Ctrl-c>d     Rope show documentation
-  " <Ctrl-c>f     Rope find occurrences
-  " <Leader>b     Set, unset breakpoint (g:pymode_breakpoint enabled)
-  " [[            Jump on previous class or function (normal, visual, operator modes)
-  " ]]            Jump on next class or function (normal, visual, operator modes)
-  " [M            Jump on previous class or method (normal, visual, operator modes)
-  " ]M            Jump on next class or method (normal, visual, operator modes)
-  let g:pymode_rope = 0
-  "disable run python code
-  let g:pymode_run = 0
-
-  " Documentation
-  let g:pymode_doc = 1
-
-  "Linting
-  let g:pymode_lint = 0
-  " Switch pylint, pyflakes, pep8, mccabe code-checkers
-  let g:pymode_lint_checker = "pyflakes,pep8"
-  " Auto check on save
-  let g:pymode_lint_write = 1
-  " Skip errors and warnings
-  " E.g. "E501,W002"
-  let g:pymode_lint_ignore = "W191"
-
-  " Support virtualenv
-  let g:pymode_virtualenv = 1
-
-  " Enable breakpoints plugin
-  let g:pymode_breakpoint = 1
-  let g:pymode_breakpoint_key = '<leader>b'
-
-  " syntax highlighting
-  let g:pymode_syntax = 1
-  let g:pymode_syntax_all = 1
-
-  " Don't autofold code
-  let g:pymode_folding = 0
-" }
-endfunction
-autocmd vimrc VimEnter * call s:set_pymode_options()
 
 " hexmap key mapping
 " map <F6> <Plug>HexManager
