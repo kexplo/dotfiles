@@ -13,20 +13,15 @@ endif
 " vim-plug
 call plug#begin('~/.vim/plugged')
 
-" Group dependencies, vim-snippets depends on ultisnips
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-
 " On-demend loading
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
-"Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 if !has('nvim')
   Plug 'tpope/vim-sensible'
 endif
 Plug 'Valloric/YouCompleteMe' ", { 'do': './install.py' }
 Plug 'w0rp/ale'
 Plug 'majutsushi/tagbar'  " ctags required
-" Plug 'Lokaltog/vim-powerline', { 'branch': 'develop' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'sheerun/vim-polyglot'
@@ -38,7 +33,7 @@ endif
 
 Plug 'Yggdroot/indentLine'
 
-" customizing any colorscheme
+" customizing any colorscheme via '~/.vim/after/colors'
 Plug 'vim-scripts/AfterColors.vim'
 
 " continuously updated session files
@@ -78,7 +73,6 @@ set sw=4
 set sts=4
 set autoindent
 
-"colorscheme evening
 colorscheme desert
 
 set fileencoding=utf-8
@@ -166,7 +160,6 @@ augroup filetype_go
   autocmd FileType go set tabstop=4
 augroup END
 
-
 " YouCompleteMe
 autocmd vimrc VimEnter *
 \ if exists('g:ycm_goto_buffer_command')
@@ -207,22 +200,15 @@ augroup except_slow_filetypes
   autocmd FileType json,yaml let g:indentLine_setConceal = 0
 augroup END
 
-"tab visualize
+" tab visualize
+"  examples:
+"   set list lcs=tab:\|\
+"   set listchars=eol:⏎,tab:␉·,trail:␠,nbsp:⎵
 set list lcs=tab:\|·
-" set list lcs=tab:\|\
-" :set listchars=eol:⏎,tab:␉·,trail:␠,nbsp:⎵
-
-"eol 추가 막기
-"set binary noeol
 
 " insert current datetime
 nmap <F5> a<C-R>=strftime("%Y-%m-%d %I:%M:%S")<CR><Esc>
 imap <F5> <C-R>=strftime("%Y-%m-%d %I:%M:%S")<CR>
-
-"cpp, h switch
-" :e %<.cpp
-" :e %<.h
-"
 
 " FZF
 command! -bang -nargs=? -complete=dir Files
@@ -252,19 +238,6 @@ nnoremap <s-k> :YcmCompleter GetDoc<CR>
 " call fzf.vim Files
 nnoremap <C-P> :Files<CR>
 
-"key memo
-"Ctrl-E, Ctrl-Y // up down scroll without moving the cursor
-"Ctrl-u // moves screen up 1/2 page
-"Ctrl-d // moves screen down 1/2 page
-"Ctrl-b // moves screen up one page
-"Ctrl-f // moves screen down one page
-"
-"z-z // move current line to the middle of the screen
-"z-t // move current line to the top of the screen
-"z-b // move current line to the bottom of the screen
-"
-"
-
 " apt-get install silversearcher-ag
 " ack.vim + the_silver_searcher
 if executable('rg')
@@ -287,3 +260,21 @@ augroup fast_esc
 augroup END
 
 set mouse=v
+
+"key memo
+"Ctrl-E, Ctrl-Y // up down scroll without moving the cursor
+"Ctrl-u // moves screen up 1/2 page
+"Ctrl-d // moves screen down 1/2 page
+"Ctrl-b // moves screen up one page
+"Ctrl-f // moves screen down one page
+"
+"z-z // move current line to the middle of the screen
+"z-t // move current line to the top of the screen
+"z-b // move current line to the bottom of the screen
+"
+"cpp, h switch
+" :e %<.cpp
+" :e %<.h
+"
+"prevent append EOF(End Of Line).
+"set binary noeol
