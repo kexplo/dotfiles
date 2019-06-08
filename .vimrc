@@ -36,7 +36,6 @@ if has('nvim')
   Plug 'kexplo/koach.nvim'
 endif
 
-Plug 'vim-scripts/hexman.vim'
 Plug 'Yggdroot/indentLine'
 
 " customizing any colorscheme
@@ -117,12 +116,6 @@ if has('gui_running')
   set guifont=consolas:h10
 endif
 
-" set status line always visible
-" set laststatus=2
-
-"파일 종류 자동 인식
-"filetype plugin indent on
-
 augroup vimrc
   autocmd!
 augroup END
@@ -202,22 +195,6 @@ function! s:set_ale_options()
 endfunction
 autocmd vimrc VimEnter * call s:set_ale_options()
 
-" hexmap key mapping
-" map <F6> <Plug>HexManager
-"<leader> hm    HexManager: Call/Leave Hexmode (using xxd)
-"<leader> hd    HexDelete: delete hex character under cursor
-"<leader> hi    HexInsert: Insert Ascii character before cursor
-"<leader> hg    HexGoto: Goto hex offset.
-"<leader> hn    HexNext: Goto next hex offset.
-"<leader> hp    HexPrev: Goto previous hex offset.
-"<leader> hs    HexStatus: Show / Hide hexoffset infos in statusline
-"                         and related ascii column
-
-" Taglist Cmd
-" :TlistToggle  open/close the taglist window.
-" :TlistUpdate  update the tags for the current buffer.
-"
-"
 let g:indentLine_char = '┆'
 let g:indentLine_color_term = 239
 let g:indentLine_color_gui = '#A4E57E'
