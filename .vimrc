@@ -230,7 +230,7 @@ autocmd vimrc VimEnter *
 
 " ALE
 function! s:set_ale_options()
-  let g:ale_python_mypy_options = '--py2 --ignore-missing-imports --follow-imports=skip'
+  "let g:ale_python_mypy_options = '--py2 --ignore-missing-imports --follow-imports=skip'
   " let g:ale_python_mypy_options = '--py2 --ignore-missing-imports'
 endfunction
 autocmd vimrc VimEnter * call s:set_ale_options()
