@@ -15,6 +15,8 @@ zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-syntax-highlighting"
 zplug "zsh-users/zsh-history-substring-search"
 
+zplug "agkozak/zsh-z"
+
 zplug "kexplo/rc", as:theme, use:kexplo.zsh-theme
 
 # zplug load --verbose
@@ -128,6 +130,3 @@ if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -
 
 # direnv
 eval "$(direnv hook zsh)"
-
-# z
-source "$(brew --prefix)/etc/profile.d/z.sh"
