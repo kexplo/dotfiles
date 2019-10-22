@@ -17,7 +17,7 @@ zplug "zsh-users/zsh-history-substring-search"
 
 zplug "agkozak/zsh-z"
 
-zplug "kexplo/rc", as:theme, use:kexplo.zsh-theme
+zplug "kexplo/dotfiles", as:theme, use:kexplo.zsh-theme
 
 # zplug load --verbose
 zplug load
