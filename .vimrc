@@ -114,6 +114,13 @@ augroup vimrc
   autocmd!
 augroup END
 
+" MSBuild
+augroup filetype_msbuild
+  autocmd!
+  autocmd BufRead,BufNewFile Directory.Build.props setfiletype xml
+  autocmd BufRead,BufNewFile Directory.Build.targets setfiletype xml
+augroup END
+
 "google protocol buffer
 augroup filetype_proto
   autocmd!
