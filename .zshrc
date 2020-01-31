@@ -130,3 +130,9 @@ if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -
 
 # direnv
 eval "$(direnv hook zsh)"
+
+# snap
+export PATH="/snap/bin:$PATH"
+
+# microk8s kubectl
+alias kubectl='microk8s.kubectl'
