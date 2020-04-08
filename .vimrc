@@ -19,7 +19,17 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 if !has('nvim')
   Plug 'tpope/vim-sensible'
 endif
-Plug 'Valloric/YouCompleteMe' ", { 'do': './install.py' }
+
+" LSP Plugins
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'Shougo/deoplete.nvim'
+Plug 'lighttiger2505/deoplete-vim-lsp'
+"------------------------------------------------------------------------------
+
 Plug 'w0rp/ale'
 Plug 'majutsushi/tagbar'  " ctags required
 Plug 'vim-airline/vim-airline'
