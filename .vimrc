@@ -97,13 +97,7 @@ if has('win32')
   language messages ko_kr.utf-8
 else
   if !has('nvim')
-    "for fish shell
-    if &shell =~# 'fish$'
-      set shell=/bin/bash
-      set term=xterm-256color
-    elseif &shell =~# 'zsh$'
-      set term=xterm-256color
-    endif
+    set term=xterm-256color
   endif
 endif
 
@@ -175,15 +169,6 @@ augroup filetype_go
   autocmd FileType go set tabstop=4
 augroup END
 
-" YouCompleteMe
-autocmd vimrc VimEnter *
-\ if exists('g:ycm_goto_buffer_command')
-\|  let g:ycm_goto_buffer_command = 'new-tab'
-\|  let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
-\|  let g:ycm_confirm_extra_conf = 1
-\|  let g:ycm_extra_conf_globlist = ['~/.vim/*']
-\|endif
-
 " NerdTree
 autocmd vimrc VimEnter *
 \ if exists(':NERDTreeToggle')
@@ -247,7 +232,10 @@ endif
 
 " Key mappings
 nnoremap <F4> :TlistToggle<CR><CR>
-nnoremap <F12> :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <F12> :LspDefinition<CR>
+" nnoremap <F12> :tab split<cr>:LspDefinition<cr>
+" nnoremap <F12> :sp<cr>:LspDefinition<cr>
+" nnoremap <F12> :vsp<cr>:LspDefinition<cr>
 nnoremap <F7> :PymodeLint<CR><CR>
 nnoremap <s-k> :YcmCompleter GetDoc<CR>
 " call fzf.vim Files
