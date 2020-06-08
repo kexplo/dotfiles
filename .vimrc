@@ -34,6 +34,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-sleuth'
+Plug 'RRethy/vim-illuminate'
 
 if has('nvim')
   Plug 'kexplo/koach.nvim'
