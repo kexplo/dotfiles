@@ -27,3 +27,5 @@
   log = ~/dotfiles/diff-highlight | less -R -X -e
   show = ~/dotfiles/diff-highlight | less -R -X -e
   diff = ~/dotfiles/diff-highlight | less -R -X -e
+[init]
+	defaultBranch = main
