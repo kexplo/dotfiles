@@ -32,9 +32,11 @@ Plug 'w0rp/ale'
 Plug 'majutsushi/tagbar'  " ctags required
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-sleuth'
 Plug 'RRethy/vim-illuminate'
+
+Plug 'fatih/vim-go'
+Plug 'sheerun/vim-polyglot'
 
 if has('nvim')
   Plug 'kexplo/koach.nvim'
