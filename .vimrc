@@ -246,7 +246,11 @@ nnoremap <C-P> :Files<CR>
 
 " apt-get install silversearcher-ag
 " ack.vim + the_silver_searcher
-if executable('rg')
+if exists(':Rg')
+  nnoremap <leader>aa :Rg<Space>
+  nnoremap <leader>aw :Rg '<C-R><C-W>'<CR>
+  vnoremap <leader>av y:Rg '<C-R>"'<CR>
+elseif executable('rg')
   let g:ackprg = 'rg --vimgrep --no-heading'
   nnoremap <leader>aa :Ack!<Space>
   nnoremap <leader>aw :Ack! '<C-R><C-W>'<CR>
