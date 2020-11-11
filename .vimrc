@@ -186,11 +186,8 @@ autocmd vimrc VimEnter *
 \|endif
 
 " ALE
-function! s:set_ale_options()
-  "let g:ale_python_mypy_options = '--py2 --ignore-missing-imports --follow-imports=skip'
-  " let g:ale_python_mypy_options = '--py2 --ignore-missing-imports'
-endfunction
-autocmd vimrc VimEnter * call s:set_ale_options()
+"let g:ale_python_mypy_options = '--py2 --ignore-missing-imports --follow-imports=skip'
+"let g:ale_python_mypy_options = '--py2 --ignore-missing-imports'
 
 " context.vim
 let g:context_enabled = 1
@@ -244,7 +241,6 @@ nnoremap <F12> :LspDefinition<CR>
 " nnoremap <F12> :sp<cr>:LspDefinition<cr>
 " nnoremap <F12> :vsp<cr>:LspDefinition<cr>
 nnoremap <F7> :PymodeLint<CR><CR>
-nnoremap <s-k> :YcmCompleter GetDoc<CR>
 " call fzf.vim Files
 nnoremap <C-P> :Files<CR>
 
