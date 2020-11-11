@@ -34,6 +34,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-sleuth'
 Plug 'RRethy/vim-illuminate'
+Plug 'wellle/context.vim'
 
 Plug 'fatih/vim-go'
 Plug 'sheerun/vim-polyglot'
@@ -190,6 +191,9 @@ function! s:set_ale_options()
   " let g:ale_python_mypy_options = '--py2 --ignore-missing-imports'
 endfunction
 autocmd vimrc VimEnter * call s:set_ale_options()
+
+" context.vim
+let g:context_enabled = 1
 
 let g:indentLine_char = '┆'
 let g:indentLine_color_term = 239
