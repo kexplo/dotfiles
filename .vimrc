@@ -114,6 +114,8 @@ if has('gui_running')
   set guifont=consolas:h10
 endif
 
+"==============================================================================
+
 augroup vimrc
   autocmd!
 augroup END
@@ -171,30 +173,17 @@ augroup filetype_go
   autocmd FileType go set tabstop=4
 augroup END
 
-" NerdTree
-autocmd vimrc VimEnter *
-\ if exists(':NERDTreeToggle')
-\|  map <F2> :NERDTreeToggle<CR>
-\|endif
 
-" Tagbar
-autocmd vimrc VimEnter *
-\ if exists(':TagbarToggle')
-\|  map <F3> :TagbarToggle<CR>
-\|endif
-
-" ALE
-"let g:ale_python_mypy_options = '--py2 --ignore-missing-imports --follow-imports=skip'
-"let g:ale_python_mypy_options = '--py2 --ignore-missing-imports'
 
 " context.vim
 let g:context_enabled = 1
 
+" indentLine
 let g:indentLine_char = '┆'
 let g:indentLine_color_term = 239
 let g:indentLine_color_gui = '#A4E57E'
 
-augroup except_slow_filetypes
+augroup off_indentline_when_slow_filetypes
   autocmd!
   autocmd FileType * let g:indentLine_enabled = 1
   autocmd FileType * let g:indentLine_setConceal = 0
@@ -207,10 +196,6 @@ augroup END
 "   set list lcs=tab:\|\
 "   set listchars=eol:⏎,tab:␉·,trail:␠,nbsp:⎵
 set list lcs=tab:\|·
-
-" insert current datetime
-nmap <F5> a<C-R>=strftime("%Y-%m-%d %I:%M:%S")<CR><Esc>
-imap <F5> <C-R>=strftime("%Y-%m-%d %I:%M:%S")<CR>
 
 " FZF
 command! -bang -nargs=? -complete=dir Files
@@ -232,33 +217,40 @@ if executable('rg')
         \   <bang>0)
 endif
 
+"==============================================================================
+
 " Key mappings
-nnoremap <F4> :TlistToggle<CR><CR>
+nnoremap <F4> :LspDocumentDiagnostics<CR><CR>
 nnoremap <F12> :LspDefinition<CR>
 " nnoremap <F12> :tab split<cr>:LspDefinition<cr>
 " nnoremap <F12> :sp<cr>:LspDefinition<cr>
 " nnoremap <F12> :vsp<cr>:LspDefinition<cr>
-nnoremap <F7> :PymodeLint<CR><CR>
 " call fzf.vim Files
 nnoremap <C-P> :Files<CR>
 
-" apt-get install silversearcher-ag
-" ack.vim + the_silver_searcher
-if exists(':Rg')
-  nnoremap <leader>aa :Rg<Space>
-  nnoremap <leader>aw :Rg '<C-R><C-W>'<CR>
-  vnoremap <leader>av y:Rg '<C-R>"'<CR>
-elseif executable('rg')
-  let g:ackprg = 'rg --vimgrep --no-heading'
-  nnoremap <leader>aa :Ack!<Space>
-  nnoremap <leader>aw :Ack! '<C-R><C-W>'<CR>
-  vnoremap <leader>av y:Ack! '<C-R>"'<CR>
-elseif executable('ag')
-  let g:ackprg = 'ag --vimgrep'
-  nnoremap <leader>aa :Ack!<Space>
-  nnoremap <leader>aw :Ack! --literal '<C-R><C-W>'<CR>
-  vnoremap <leader>av y:Ack! --literal '<C-R>"'<CR>
-endif
+" NerdTree
+autocmd vimrc VimEnter *
+\ if exists(':NERDTreeToggle')
+\|  map <F2> :NERDTreeToggle<CR>
+\|endif
+
+" Tagbar
+autocmd vimrc VimEnter *
+\ if exists(':TagbarToggle')
+\|  map <F3> :TagbarToggle<CR>
+\|endif
+
+" fzf
+autocmd vimrc VimEnter *
+\ if exists(':Rg')
+\|  nnoremap <leader>aa :Rg<Space>
+\|  nnoremap <leader>aw :Rg <C-R><C-W><CR>
+\|  vnoremap <leader>av y:Rg <C-R>"<CR>
+\|endif
+
+" insert current datetime
+nmap <F5> a<C-R>=strftime("%Y-%m-%d %I:%M:%S")<CR><Esc>
+imap <F5> <C-R>=strftime("%Y-%m-%d %I:%M:%S")<CR>
 
 " remove ESC delay (neovim)
 augroup fast_esc
@@ -266,6 +258,8 @@ augroup fast_esc
   autocmd InsertEnter * set ttimeoutlen=0
   autocmd InsertLeave * set ttimeoutlen=100
 augroup END
+
+"==============================================================================
 
 set mouse=v
 
