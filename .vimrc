@@ -321,3 +321,8 @@ set mouse=v
 "
 "prevent append EOF(End Of Line).
 "set binary noeol
+
+" Load local config
+if filereadable($HOME . '/.vimrc.local')
+  source $HOME/.vimrc.local
+endif
