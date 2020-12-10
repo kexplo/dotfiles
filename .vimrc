@@ -175,6 +175,8 @@ augroup filetype_go
 augroup END
 
 
+" vim-airline
+let g:airline#extensions#tabline#enabled = 1
 
 " context.vim
 let g:context_enabled = 1
