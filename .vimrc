@@ -173,7 +173,7 @@ augroup filetype_go
   autocmd FileType go set shiftwidth=4
   autocmd FileType go set softtabstop=4
   autocmd FileType go set tabstop=4
-  autocmd BufWritePre * undojoin | Neoformat
+  autocmd BufWritePre *.go undojoin | Neoformat
 augroup END
 
 " vim-lsp
