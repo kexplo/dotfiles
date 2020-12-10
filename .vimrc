@@ -174,6 +174,9 @@ augroup filetype_go
   autocmd FileType go set tabstop=4
 augroup END
 
+" vim-lsp
+let g:lsp_diagnostics_echo_cursor = 1
+let g:lsp_diagnostics_echo_delay = 0
 
 " vim-airline
 let g:airline#extensions#tabline#enabled = 1
@@ -255,6 +258,9 @@ endif
 " Key mappings
 nnoremap <F4> :LspDocumentDiagnostics<CR><CR>
 nnoremap <F12> :LspDefinition<CR>
+nnoremap gd :LspDefinition<CR>
+nnoremap gr :LspReferences<CR>
+nnoremap K :LspHover<CR>
 " nnoremap <F12> :tab split<cr>:LspDefinition<cr>
 " nnoremap <F12> :sp<cr>:LspDefinition<cr>
 " nnoremap <F12> :vsp<cr>:LspDefinition<cr>
