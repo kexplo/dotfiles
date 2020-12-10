@@ -35,8 +35,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-sleuth'
 Plug 'RRethy/vim-illuminate'
 Plug 'wellle/context.vim'
-
-Plug 'fatih/vim-go'
 Plug 'sheerun/vim-polyglot'
 
 if has('nvim')
