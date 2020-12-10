@@ -28,7 +28,7 @@ Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 "------------------------------------------------------------------------------
 
-Plug 'w0rp/ale'
+" Plug 'w0rp/ale'
 Plug 'majutsushi/tagbar'  " ctags required
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
