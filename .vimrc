@@ -207,10 +207,40 @@ if executable('rg')
         \ call fzf#vim#grep('rg ' .
         \   '--color=always ' .
         \   '--glob "!.git/*" ' .
+        \   '--line-number ' .
+        \   '--column ' .
+        \   '--no-heading ' .
+        \   '--hidden ' .
+        \   '--ignore-file=.gitignore ' .
+        \   '--follow '.shellescape(<q-args>), 1,
+        \   fzf#vim#with_preview('right:50%'),
+        \   <bang>0)
+
+  " with '--ignore-case'
+  command! -bang -nargs=* Rgi
+        \ call fzf#vim#grep('rg ' .
+        \   '--color=always ' .
+        \   '--glob "!.git/*" ' .
         \   '--ignore-case ' .
         \   '--line-number ' .
         \   '--column ' .
         \   '--no-heading ' .
+        \   '--hidden ' .
+        \   '--ignore-file=.gitignore ' .
+        \   '--follow '.shellescape(<q-args>), 1,
+        \   fzf#vim#with_preview('right:50%'),
+        \   <bang>0)
+
+  " with '--line-regexp'
+  command! -bang -nargs=* Rgw
+        \ call fzf#vim#grep('rg ' .
+        \   '--color=always ' .
+        \   '--glob "!.git/*" ' .
+        \   '--ignore-case ' .
+        \   '--line-number ' .
+        \   '--column ' .
+        \   '--no-heading ' .
+        \   '--word-regexp ' .
         \   '--hidden ' .
         \   '--ignore-file=.gitignore ' .
         \   '--follow '.shellescape(<q-args>), 1,
