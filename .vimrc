@@ -37,6 +37,7 @@ Plug 'RRethy/vim-illuminate'
 Plug 'wellle/context.vim'
 Plug 'hotwatermorning/auto-git-diff'
 Plug 'sheerun/vim-polyglot'
+Plug 'sbdchd/neoformat'
 
 if has('nvim')
   Plug 'kexplo/koach.nvim'
@@ -172,6 +173,7 @@ augroup filetype_go
   autocmd FileType go set shiftwidth=4
   autocmd FileType go set softtabstop=4
   autocmd FileType go set tabstop=4
+  autocmd BufWritePre * undojoin | Neoformat
 augroup END
 
 " vim-lsp
