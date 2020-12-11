@@ -82,7 +82,7 @@ alias fzf="fzf --preview 'head -100 {}'"
 alias rg='rg --hidden'
 alias utc='date -u "+%x %T %Z"'
 
-alias git-cleanup-branch='git fetch --all -p && git branch -v | grep gone | awk "{print $1}" | xargs git branch -D'
+alias git-cleanup-branch='git fetch --all -p && git branch -v | grep gone | cut -c 3- | awk '\''{print $1}'\'' | xargs git branch -D'
 
 #F1 ^[OP
 #F2 ^[OQ
