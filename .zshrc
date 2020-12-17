@@ -130,7 +130,7 @@ eval "$(pyenv init -)"
 if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
 # direnv
-eval "$(direnv hook zsh)"
+if which direnv >/dev/null; then eval "$(direnv hook zsh)"; fi
 
 # snap
 export PATH="/snap/bin:$PATH"
