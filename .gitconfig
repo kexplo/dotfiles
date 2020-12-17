@@ -1,31 +1,32 @@
+# vim: noexpandtab
 [user]
-  name = Chanwoong Kim
-  email = me@chanwoong.kim
+	name = Chanwoong Kim
+	email = me@chanwoong.kim
 [core]
-  autocrlf = false
-  whitespace = trailing-space
-  # -X: no screen clear when exit.
-  # -R:
-  pager = less -R -X -e
-  editor = vim
+	autocrlf = false
+	whitespace = trailing-space
+	# -X: no screen clear when exit.
+	# -R:
+	pager = less -R -X -e
+	editor = vim
 [gui]
-  encoding = utf-8
+	encoding = utf-8
 [alias]
-  lg1 = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold red)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(cyan)<%an>%C(reset)%C(bold yellow)%d%C(reset)' --all
-  lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold red)%h%C(reset) - %C(bold cyan)%ai%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %C(cyan)<%an>%C(reset)' --all
-  lg = !"git lg1"
-  st = status --ignore-submodule=none
+	lg1 = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold red)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(cyan)<%an>%C(reset)%C(bold yellow)%d%C(reset)' --all
+	lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold red)%h%C(reset) - %C(bold cyan)%ai%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %C(cyan)<%an>%C(reset)' --all
+	lg = !"git lg1"
+	st = status --ignore-submodule=none
 [color]
-  ui = true
+	ui = true
 [push]
-  default = simple
+	default = simple
 [diff]
-  compactionHeuristic = true
+	compactionHeuristic = true
 [interactive]
-  diffFilter = ~/dotfiles/diff-highlight
+	diffFilter = ~/dotfiles/diff-highlight
 [pager]
-  log = ~/dotfiles/diff-highlight | less -R -X -e
-  show = ~/dotfiles/diff-highlight | less -R -X -e
-  diff = ~/dotfiles/diff-highlight | less -R -X -e
+	log = ~/dotfiles/diff-highlight | less -R -X -e
+	show = ~/dotfiles/diff-highlight | less -R -X -e
+	diff = ~/dotfiles/diff-highlight | less -R -X -e
 [init]
 	defaultBranch = main
