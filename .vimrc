@@ -1,6 +1,7 @@
 " vim:ft=vim:et:ts=2:sw=2:sts=2:
 " encoding 설정이 맨 위에 있어야 gvim에서 메뉴가 깨지지 않는다.
 set encoding=utf-8
+set fileformats=unix,mac,dos
 
 set noswapfile
 
