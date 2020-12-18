@@ -29,7 +29,7 @@ Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 "------------------------------------------------------------------------------
 
-" Plug 'w0rp/ale'
+Plug 'dense-analysis/ale', { 'for': ['make', 'python'] }
 Plug 'majutsushi/tagbar'  " ctags required
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -180,6 +180,7 @@ augroup END
 " vim-lsp
 let g:lsp_diagnostics_echo_cursor = 1
 let g:lsp_diagnostics_echo_delay = 0
+let g:lsp_settings_filetype_python = ['jedi-language-server']
 
 " vim-airline
 let g:airline#extensions#tabline#enabled = 1
