@@ -1,3 +1,7 @@
+"==============================================================================
+" Basic configs
+"==============================================================================
+
 " vim:ft=vim:et:ts=2:sw=2:sts=2:
 " encoding 설정이 맨 위에 있어야 gvim에서 메뉴가 깨지지 않는다.
 set encoding=utf-8
@@ -50,7 +54,9 @@ if has('gui_running')
   set guifont=consolas:h10
 endif
 
-"======= plugins ==============================================================
+"==============================================================================
+" Plugins
+"==============================================================================
 
 " vim-plug
 call plug#begin('~/.vim/plugged')
@@ -65,6 +71,9 @@ endif
 " LSP Plugins
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
+  let g:lsp_diagnostics_echo_cursor = 1
+  let g:lsp_diagnostics_echo_delay = 0
+  let g:lsp_settings_filetype_python = ['jedi-language-server']
 Plug 'mattn/vim-lsp-settings'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
@@ -73,10 +82,12 @@ Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'dense-analysis/ale', { 'for': ['make', 'python'] }
 Plug 'majutsushi/tagbar'  " ctags required
 Plug 'vim-airline/vim-airline'
+  let g:airline#extensions#tabline#enabled = 1
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-sleuth'
 Plug 'RRethy/vim-illuminate'
 Plug 'wellle/context.vim'
+  let g:context_enabled = 1
 Plug 'hotwatermorning/auto-git-diff'
 Plug 'sheerun/vim-polyglot'
 Plug 'sbdchd/neoformat'
@@ -86,6 +97,17 @@ if has('nvim')
 endif
 
 Plug 'Yggdroot/indentLine'
+  let g:indentLine_char = '┆'
+  let g:indentLine_color_term = 239
+  let g:indentLine_color_gui = '#A4E57E'
+
+  augroup off_indentline_when_slow_filetypes
+    autocmd!
+    autocmd FileType * let g:indentLine_enabled = 1
+    autocmd FileType * let g:indentLine_setConceal = 0
+    autocmd FileType json,yaml let g:indentLine_enabled = 0
+    autocmd FileType json,yaml let g:indentLine_setConceal = 0
+  augroup END
 
 " customizing any colorscheme via '~/.vim/after/colors'
 Plug 'vim-scripts/AfterColors.vim'
@@ -176,31 +198,10 @@ augroup filetype_go
   autocmd BufWritePre *.go undojoin | Neoformat
 augroup END
 
-" vim-lsp
-let g:lsp_diagnostics_echo_cursor = 1
-let g:lsp_diagnostics_echo_delay = 0
-let g:lsp_settings_filetype_python = ['jedi-language-server']
-
-" vim-airline
-let g:airline#extensions#tabline#enabled = 1
-
-" context.vim
-let g:context_enabled = 1
-
-" indentLine
-let g:indentLine_char = '┆'
-let g:indentLine_color_term = 239
-let g:indentLine_color_gui = '#A4E57E'
-
-augroup off_indentline_when_slow_filetypes
-  autocmd!
-  autocmd FileType * let g:indentLine_enabled = 1
-  autocmd FileType * let g:indentLine_setConceal = 0
-  autocmd FileType json,yaml let g:indentLine_enabled = 0
-  autocmd FileType json,yaml let g:indentLine_setConceal = 0
-augroup END
-
+"==============================================================================
 " FZF
+"==============================================================================
+
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview('right'), <bang>0)
 
@@ -251,8 +252,9 @@ if executable('rg')
 endif
 
 "==============================================================================
-
 " Key mappings
+"==============================================================================
+
 nnoremap <F4> :LspDocumentDiagnostics<CR><CR>
 nnoremap <F12> :LspDefinition<CR>
 nnoremap gd :LspDefinition<CR>
