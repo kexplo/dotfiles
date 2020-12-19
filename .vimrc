@@ -37,7 +37,10 @@ syntax on
 
 colorscheme desert
 
-if has('win32')
+let s:windows = has('win32') || has('win64')
+let s:macos = has('mac')
+
+if s:windows
   language messages ko_kr.utf-8
 else
   if !has('nvim')
@@ -124,7 +127,7 @@ Plug 'tpope/vim-commentary'
 Plug 'mileszs/ack.vim'
 Plug 'tpope/vim-unimpaired'
 
-if has('win32')
+if s:windows
   "transparency windows vim (windows gvim)
   Plug 'kexplo/vimtweak'
   Plug 'mattn/transparency-windows-vim'
