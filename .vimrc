@@ -126,13 +126,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-commentary'
 Plug 'mileszs/ack.vim'
 Plug 'tpope/vim-unimpaired'
-
-if s:windows
-  "transparency windows vim (windows gvim)
-  Plug 'kexplo/vimtweak'
-  Plug 'mattn/transparency-windows-vim'
-endif
-
 Plug 'Glench/Vim-Jinja2-Syntax'
 
 " typescript
