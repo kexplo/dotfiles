@@ -2,11 +2,52 @@
 " encoding 설정이 맨 위에 있어야 gvim에서 메뉴가 깨지지 않는다.
 set encoding=utf-8
 set fileformats=unix,mac,dos
-
+set fileencoding=utf-8
+set fileencodings=utf-8,default,latin1
 set noswapfile
+set nocompatible
+set nofoldenable
+
+" use softtab
+set expandtab
+"set tab size
+set tabstop=4
+set sw=4
+set sts=4
+set autoindent
+
+"use backspace
+set bs=indent,eol,start
+
+" Highlight search
+set hls
+
+" tab visualize
+"  examples:
+"   set list lcs=tab:\|\
+"   set listchars=eol:⏎,tab:␉·,trail:␠,nbsp:⎵
+set list lcs=tab:\|·
+
+"syntax highlight on
+syntax on
+
+colorscheme desert
+
+if has('win32')
+  language messages ko_kr.utf-8
+else
+  if !has('nvim')
+    set term=xterm-256color
+  endif
+endif
 
 if has('nvim')
   let g:loaded_ruby_provider = 1
+endif
+
+if has('gui_running')
+  "set gvim font
+  set guifont=consolas:h10
 endif
 
 "======= plugins ==============================================================
@@ -74,48 +115,6 @@ Plug 'HerringtonDarkholme/yats.vim', { 'for': 'typescript' }
 Plug 'Shougo/vimproc.vim'
 
 call plug#end()
-
-"==============================================================================
-
-set nocompatible               " be iMproved
-" use softtab
-set expandtab
-"set tab size
-set tabstop=4
-set sw=4
-set sts=4
-set autoindent
-
-colorscheme desert
-
-set fileencoding=utf-8
-set fileencodings=ucs-bom,utf-8,cp949,latin1
-set fileformat=unix
-
-"use backspace
-set bs=indent,eol,start
-
-" Highlight search
-set hls
-
-if has('win32')
-  language messages ko_kr.utf-8
-else
-  if !has('nvim')
-    set term=xterm-256color
-  endif
-endif
-
-"syntax highlight on
-syntax on
-
-" disable folding as default
-set nofoldenable
-
-if has('gui_running')
-  "set gvim font
-  set guifont=consolas:h10
-endif
 
 "==============================================================================
 
@@ -200,12 +199,6 @@ augroup off_indentline_when_slow_filetypes
   autocmd FileType json,yaml let g:indentLine_enabled = 0
   autocmd FileType json,yaml let g:indentLine_setConceal = 0
 augroup END
-
-" tab visualize
-"  examples:
-"   set list lcs=tab:\|\
-"   set listchars=eol:⏎,tab:␉·,trail:␠,nbsp:⎵
-set list lcs=tab:\|·
 
 " FZF
 command! -bang -nargs=? -complete=dir Files
@@ -315,8 +308,6 @@ augroup fast_esc
 augroup END
 
 "==============================================================================
-
-set mouse=v
 
 "key memo
 "Ctrl-E, Ctrl-Y // up down scroll without moving the cursor
