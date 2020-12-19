@@ -55,6 +55,8 @@ endif
 if has('gui_running')
   "set gvim font
   set guifont=consolas:h10
+  set lines=40
+  set columns=158
 endif
 
 "==============================================================================
