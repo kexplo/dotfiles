@@ -67,9 +67,7 @@ call plug#begin('~/.vim/plugged')
 " On-demend loading
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
-if !has('nvim')
-  Plug 'tpope/vim-sensible'
-endif
+Plug 'tpope/vim-sensible'
 
 " LSP Plugins
 Plug 'prabirshrestha/async.vim'
