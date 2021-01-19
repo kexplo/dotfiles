@@ -77,6 +77,17 @@ Plug 'prabirshrestha/vim-lsp'
   let g:lsp_diagnostics_echo_cursor = 1
   let g:lsp_diagnostics_echo_delay = 0
   let g:lsp_settings_filetype_python = ['jedi-language-server']
+  let g:lsp_settings = {
+\   'yaml-language-server': {
+\     'workspace_config': {
+\       'yaml': {
+\         'schemas': {
+\           'kubernetes': '*',
+\         }
+\       }
+\     }
+\   }
+\ }
 Plug 'mattn/vim-lsp-settings'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
