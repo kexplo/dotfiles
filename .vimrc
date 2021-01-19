@@ -82,7 +82,7 @@ Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 "------------------------------------------------------------------------------
 
-Plug 'dense-analysis/ale', { 'for': ['make', 'python'] }
+Plug 'dense-analysis/ale', { 'for': ['make', 'python', 'sh'] }
 Plug 'majutsushi/tagbar'  " ctags required
 Plug 'vim-airline/vim-airline'
   let g:airline#extensions#tabline#enabled = 1
