@@ -76,6 +76,7 @@ Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
   let g:lsp_diagnostics_echo_cursor = 1
   let g:lsp_diagnostics_echo_delay = 0
+  let g:lsp_document_code_action_signs_enabled = 0
   let g:lsp_settings_filetype_python = ['jedi-language-server']
   let g:lsp_settings = {
 \   'yaml-language-server': {
