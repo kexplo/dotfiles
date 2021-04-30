@@ -132,6 +132,10 @@ if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -
 # direnv
 if which direnv >/dev/null; then eval "$(direnv hook zsh)"; fi
 
+# enable Docker buildkit
+export DOCKER_BUILDKIT=1
+export COMPOSE_DOCKER_CLI_BUILD=1
+
 # snap
 export PATH="/snap/bin:$PATH"
 
