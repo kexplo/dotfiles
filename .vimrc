@@ -78,6 +78,7 @@ Plug 'prabirshrestha/vim-lsp'
   let g:lsp_diagnostics_echo_delay = 0
   let g:lsp_document_code_action_signs_enabled = 0
   let g:lsp_settings_filetype_python = ['jedi-language-server']
+  let g:lsp_settings_filetype_go = ['golangci-lint-langserver', 'gopls']
   let g:lsp_settings = {
 \   'yaml-language-server': {
 \     'workspace_config': {
@@ -89,12 +90,13 @@ Plug 'prabirshrestha/vim-lsp'
 \     }
 \   }
 \ }
+
 Plug 'mattn/vim-lsp-settings'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 "------------------------------------------------------------------------------
 
-Plug 'dense-analysis/ale', { 'for': ['make', 'python', 'sh'] }
+Plug 'dense-analysis/ale', { 'for': ['make', 'python', 'sh', 'dockerfile'] }
 Plug 'majutsushi/tagbar'  " ctags required
 Plug 'vim-airline/vim-airline'
   let g:airline#extensions#tabline#enabled = 1
@@ -134,17 +136,20 @@ Plug 'tpope/vim-obsession'
 
 Plug 'godlygeek/tabular'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-unimpaired'
+Plug 'rhysd/clever-f.vim'
 
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'tpope/vim-commentary'
-Plug 'mileszs/ack.vim'
-Plug 'tpope/vim-unimpaired'
+
 Plug 'Glench/Vim-Jinja2-Syntax'
 
 " typescript
 Plug 'HerringtonDarkholme/yats.vim', { 'for': 'typescript' }
 Plug 'Shougo/vimproc.vim'
+
+Plug 'tpope/vim-fugitive'
 
 call plug#end()
 
@@ -275,6 +280,8 @@ nnoremap K :LspHover<CR>
 " nnoremap <F12> :vsp<cr>:LspDefinition<cr>
 " call fzf.vim Files
 nnoremap <C-P> :Files<CR>
+nnoremap <leader>] :bnext<CR>
+nnoremap <leader>[ :bprev<CR>
 
 " Copy to system clipboard
 vnoremap <leader>y "+y
