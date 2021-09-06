@@ -139,6 +139,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-unimpaired'
 Plug 'rhysd/clever-f.vim'
+Plug 'easymotion/vim-easymotion'
 
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
@@ -294,6 +295,10 @@ nnoremap <leader>p "+p
 nnoremap <leader>P "+P
 vnoremap <leader>p "+p
 vnoremap <leader>P "+P
+
+" Move to line (easymotion)
+map <leader><leader>l <Plug>(easymotion-bd-jk)
+nmap <leader><leader>l <Plug>(easymotion-overwin-line)
 
 " NerdTree
 autocmd vimrc VimEnter *
