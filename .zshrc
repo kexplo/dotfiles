@@ -139,9 +139,6 @@ export COMPOSE_DOCKER_CLI_BUILD=1
 # snap
 export PATH="/snap/bin:$PATH"
 
-# microk8s kubectl
-alias kubectl='microk8s.kubectl'
-
 # Load local config
 if [[ -f ~/.zshrc.local ]]; then
   source ~/.zshrc.local
