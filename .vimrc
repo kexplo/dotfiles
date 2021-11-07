@@ -42,6 +42,12 @@ let s:macos = has('mac')
 
 if s:windows
   language messages ko_kr.utf-8
+  if (&term == "win32" && &t_Co == 16)  " Vim on Windows Terminal
+    " Fix color palette
+    set t_Co=256
+    " Fix background color render, https://github.com/microsoft/terminal/issues/832
+    set t_ut=
+  endif
 else
   if !has('nvim')
     set term=xterm-256color
