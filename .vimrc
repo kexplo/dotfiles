@@ -76,34 +76,9 @@ call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
 Plug 'tpope/vim-sensible'
-
-" LSP Plugins
+Plug 'ryanoasis/vim-devicons'
 Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
-  let g:lsp_diagnostics_echo_cursor = 1
-  let g:lsp_diagnostics_echo_delay = 0
-  let g:lsp_document_code_action_signs_enabled = 0
-  let g:lsp_settings_filetype_python = ['jedi-language-server']
-  let g:lsp_settings_filetype_go = ['golangci-lint-langserver', 'gopls']
-  let g:lsp_settings = {
-\   'yaml-language-server': {
-\     'workspace_config': {
-\       'yaml': {
-\         'schemas': {
-\           'kubernetes': '*',
-\         }
-\       }
-\     }
-\   }
-\ }
-
-Plug 'mattn/vim-lsp-settings'
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
-"------------------------------------------------------------------------------
-
 Plug 'dense-analysis/ale', { 'for': ['make', 'python', 'sh', 'dockerfile'] }
-Plug 'majutsushi/tagbar'  " ctags required
 Plug 'vim-airline/vim-airline'
   let g:airline#extensions#tabline#enabled = 1
 Plug 'vim-airline/vim-airline-themes'
@@ -116,10 +91,6 @@ Plug 'sheerun/vim-polyglot'
 Plug 'sbdchd/neoformat'
   let g:neoformat_enabled_python = ['autopep8', 'isort']
   let g:neoformat_run_all_formatters = 1
-
-if has('nvim')
-  Plug 'kexplo/koach.nvim'
-endif
 
 Plug 'Yggdroot/indentLine'
   let g:indentLine_char = '┆'
@@ -158,7 +129,111 @@ Plug 'Shougo/vimproc.vim'
 
 Plug 'tpope/vim-fugitive'
 
+"------------------------------------------------------------------------------
+if !has('nvim') " vim(not neovim) plugins only
+  " LSP Plugins
+  Plug 'prabirshrestha/vim-lsp'
+    let g:lsp_diagnostics_echo_cursor = 1
+    let g:lsp_diagnostics_echo_delay = 0
+    let g:lsp_document_code_action_signs_enabled = 0
+    let g:lsp_settings_filetype_python = ['jedi-language-server']
+    let g:lsp_settings_filetype_go = ['golangci-lint-langserver', 'gopls']
+    let g:lsp_settings = {
+\   'yaml-language-server': {
+\     'workspace_config': {
+\       'yaml': {
+\         'schemas': {
+\           'kubernetes': '*',
+\         }
+\       }
+\     }
+\   }
+\ }
+
+  Plug 'mattn/vim-lsp-settings'
+  Plug 'prabirshrestha/asyncomplete.vim'
+  Plug 'prabirshrestha/asyncomplete-lsp.vim'
+  Plug 'liuchengxu/vista.vim'
+    let g:vista_default_executive = 'vim_lsp'
+else " neovim plugins only
+  Plug 'kexplo/koach.nvim'
+
+  Plug 'kyazdani42/nvim-web-devicons'
+  Plug 'neovim/nvim-lspconfig'
+  Plug 'hrsh7th/nvim-cmp'
+  Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'mfussenegger/nvim-dap'
+  Plug 'sindrets/diffview.nvim'
+  Plug 'simrat39/symbols-outline.nvim'
+  Plug 'folke/trouble.nvim'
+  Plug 'ray-x/lsp_signature.nvim'
+endif
+
 call plug#end()
+
+if has('nvim')
+  lua << EOF
+    local nvim_lsp = require('lspconfig')
+    -- Use an on_attach function to only map the following keys
+    -- after the language server attaches to the current buffer
+    local on_attach = function(client, bufnr)
+      local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+      local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+
+      -- Enable completion triggered by <c-x><c-o>
+      buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+      -- Mappings.
+      local opts = { noremap=true, silent=true }
+
+      -- See `:help vim.lsp.*` for documentation on any of the below functions
+      buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+      buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+      buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+      buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+      buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+      --buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+      --buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+      --buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+      --buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+      --buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+      --buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+      buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+      buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+      buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+      buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+      buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+      buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+    end
+
+    -- Add additional capabilities supported by nvim-cmp
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
+    -- Use a loop to conveniently call 'setup' on multiple servers and
+    -- map buffer local keybindings when the language server attaches
+    local servers = { 'jedi_language_server', 'gopls' }
+    for _, lsp in ipairs(servers) do
+      nvim_lsp[lsp].setup {
+        on_attach = on_attach,
+        flags = {
+          debounce_text_changes = 150,
+        }
+      }
+    end
+
+    require("cmp").setup {
+      sources = {
+        { name = 'nvim_lsp'}
+      }
+    }
+
+    require("trouble").setup {
+      position = "right"
+    }
+EOF
+endif
 
 "==============================================================================
 
@@ -277,14 +352,18 @@ endif
 " Key mappings
 "==============================================================================
 
-nnoremap <F4> :LspDocumentDiagnostics<CR><CR>
-nnoremap <F12> :LspDefinition<CR>
-nnoremap gd :LspDefinition<CR>
-nnoremap gr :LspReferences<CR>
-nnoremap K :LspHover<CR>
-" nnoremap <F12> :tab split<cr>:LspDefinition<cr>
-" nnoremap <F12> :sp<cr>:LspDefinition<cr>
-" nnoremap <F12> :vsp<cr>:LspDefinition<cr>
+if exists(':LspDocumentDiagnostics')
+  " vim-lsp key mappings
+  nnoremap <F4> :LspDocumentDiagnostics<CR><CR>
+  nnoremap <F12> :LspDefinition<CR>
+  nnoremap gd :LspDefinition<CR>
+  nnoremap gr :LspReferences<CR>
+  nnoremap K :LspHover<CR>
+  " nnoremap <F12> :tab split<cr>:LspDefinition<cr>
+  " nnoremap <F12> :sp<cr>:LspDefinition<cr>
+  " nnoremap <F12> :vsp<cr>:LspDefinition<cr>
+endif
+
 " call fzf.vim Files
 nnoremap <C-P> :Files<CR>
 nnoremap <leader>] :bnext<CR>
@@ -312,10 +391,12 @@ autocmd vimrc VimEnter *
 \|  map <F2> :NERDTreeToggle<CR>
 \|endif
 
-" Tagbar
+" Symbols
 autocmd vimrc VimEnter *
-\ if exists(':TagbarToggle')
-\|  map <F3> :TagbarToggle<CR>
+\ if exists(':Vista')
+\|  map <F3> :Vista<CR>
+\|elseif exists(':SymbolsOutline')
+\|  map <F3> :SymbolsOutline<CR>
 \|endif
 
 " fzf
