@@ -232,6 +232,16 @@ if has('nvim')
     require("trouble").setup {
       position = "right"
     }
+
+    require("nvim-treesitter.configs").setup {
+      ensure_installed = "maintained",
+      highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = false,
+      },
+    }
+
+    require("lsp_signature").setup()
 EOF
 endif
 
