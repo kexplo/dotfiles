@@ -8,6 +8,7 @@ zplug "lib/completion", from:oh-my-zsh
 zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/virtualenv", from:oh-my-zsh
 zplug "plugins/zsh-navigation-tools", from:oh-my-zsh
+zplug "plugins/kube-ps1", from:oh-my-zsh
 
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-completions"
@@ -52,6 +53,9 @@ setopt monitor
 # === I/O
 setopt ignoreeof     # Prevent closing the terminal using ^D
 setopt noflowcontrol
+
+# === Enable zstat
+zmodload -F zsh/stat b:zstat
 
 ############################################################################################
 

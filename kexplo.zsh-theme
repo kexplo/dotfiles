@@ -36,6 +36,11 @@ prompt_time() {
   echo -n " %{$fg_bold[gray]%}[%*]%{$reset_color%}"
 }
 
+prompt_kube() {
+  [[ "${KUBE_PS1_ENABLED}" == "off" ]] && return
+  echo -n " %{$fg_bold[blue]%}[${KUBE_PS1_CONTEXT}/${KUBE_PS1_NAMESPACE}]%{$reset_color%}"
+}
+
 prompt_return_status() {
   echo -n " %{$fg_bold[red]%}%(?..%?)%{$reset_color%} ${EXEC_TIMER_PROMPT}"
 }
@@ -50,6 +55,7 @@ build_prompt() {
   prompt_path
   prompt_git
   prompt_time
+  prompt_kube
   prompt_return_status
   prompt_shell
 }
