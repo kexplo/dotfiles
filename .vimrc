@@ -56,6 +56,7 @@ endif
 
 if has('nvim')
   let g:loaded_ruby_provider = 1
+  set inccommand=split
 endif
 
 if has('gui_running')
@@ -73,7 +74,7 @@ endif
 call plug#begin('~/.vim/plugged')
 
 " On-demend loading
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree'
 
 Plug 'tpope/vim-sensible'
 Plug 'ryanoasis/vim-devicons'
@@ -164,6 +165,7 @@ else " neovim plugins only
   Plug 'hrsh7th/cmp-nvim-lsp'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'mfussenegger/nvim-dap'
+  Plug 'nvim-lua/plenary.nvim'  " dependency for diffview.nvim
   Plug 'sindrets/diffview.nvim'
   Plug 'simrat39/symbols-outline.nvim'
   Plug 'folke/trouble.nvim'
@@ -396,10 +398,18 @@ map <leader><leader>l <Plug>(easymotion-bd-jk)
 nmap <leader><leader>l <Plug>(easymotion-overwin-line)
 
 " NerdTree
-autocmd vimrc VimEnter *
-\ if exists(':NERDTreeToggle')
-\|  map <F2> :NERDTreeToggle<CR>
-\|endif
+function! s:SmartNERDTreeToggle()
+  " Call Close, if current buf is not modifiable and NERDTree is active
+  if !&modifiable && exists("t:NERDTreeBufName")
+    NERDTreeClose
+  " Call Find, if current buf has name and modifiable
+  elseif &modifiable && len(expand("%"))
+    NERDTreeFind
+  else
+    NERDTreeToggle
+  endif
+endfunction
+map <F2> :call <SID>SmartNERDTreeToggle()<CR>
 
 " Symbols
 autocmd vimrc VimEnter *
