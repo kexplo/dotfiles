@@ -290,11 +290,11 @@ augroup END
 " Highlight excess line length (python)
 augroup filetype_python
   autocmd!
-  " highlight characters past column 80
+  " highlight characters past column 160
   autocmd FileType python highlight Excess ctermbg=DarkGrey guibg=Black
-  autocmd FileType python match Excess /\%81v.*/
+  autocmd FileType python match Excess /\%161v.*/
   autocmd FileType python set nowrap
-  autocmd FileType python set colorcolumn=80
+  autocmd FileType python set colorcolumn=160
   autocmd FileType python set expandtab
 augroup END
 
