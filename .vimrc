@@ -79,7 +79,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-sensible'
 Plug 'ryanoasis/vim-devicons'
 Plug 'prabirshrestha/async.vim'
-Plug 'dense-analysis/ale', { 'for': ['make', 'python', 'sh', 'dockerfile'] }
+Plug 'dense-analysis/ale', { 'for': ['make', 'python', 'sh', 'dockerfile', 'markdown'] }
 Plug 'vim-airline/vim-airline'
   let g:airline#extensions#tabline#enabled = 1
 Plug 'vim-airline/vim-airline-themes'
