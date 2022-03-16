@@ -21,6 +21,8 @@
 	ui = true
 [push]
 	default = simple
+[pull]
+	rebase = true
 [diff]
 	compactionHeuristic = true
 [interactive]
@@ -29,5 +31,14 @@
 	log = ~/dotfiles/diff-highlight | less -R -X -e
 	show = ~/dotfiles/diff-highlight | less -R -X -e
 	diff = ~/dotfiles/diff-highlight | less -R -X -e
+[merge]
+	conflictstyle = diff3
+[diff]
+	colorMoved = default
 [init]
 	defaultBranch = main
+[status]
+	showStash = true
+
+[include]
+	path = ~/.gitconfig.local
