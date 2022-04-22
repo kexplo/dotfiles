@@ -90,7 +90,7 @@ Plug 'wellle/context.vim'
 Plug 'hotwatermorning/auto-git-diff'
 Plug 'sheerun/vim-polyglot'
 Plug 'sbdchd/neoformat'
-  let g:neoformat_enabled_python = ['autopep8', 'isort']
+  let g:neoformat_enabled_python = ['autopep8', 'isort', 'black']
   let g:neoformat_run_all_formatters = 1
 
 Plug 'Yggdroot/indentLine'
