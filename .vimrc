@@ -225,10 +225,13 @@ if has('nvim')
       }
     end
 
-    require("cmp").setup {
+    local cmp = require("cmp")
+    cmp.setup {
       sources = {
         { name = 'nvim_lsp'}
-      }
+      },
+      -- SEE: https://github.com/hrsh7th/nvim-cmp/issues/231#issuecomment-1098175017
+      mapping = cmp.mapping.preset.insert()
     }
 
     require("trouble").setup {
