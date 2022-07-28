@@ -115,6 +115,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-unimpaired'
 Plug 'rhysd/clever-f.vim'
 Plug 'easymotion/vim-easymotion'
+Plug 'junegunn/vim-easy-align'
 
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
@@ -381,6 +382,12 @@ if exists(':LspDocumentDiagnostics')
   " nnoremap <F12> :sp<cr>:LspDefinition<cr>
   " nnoremap <F12> :vsp<cr>:LspDefinition<cr>
 endif
+
+" vim-easy-align
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 
 " call fzf.vim Files
 nnoremap <C-P> :Files<CR>
