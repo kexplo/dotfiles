@@ -165,6 +165,7 @@ else " neovim plugins only
   Plug 'neovim/nvim-lspconfig'
   Plug 'hrsh7th/nvim-cmp'
   Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'hrsh7th/cmp-path' " nvim-cmp path source for filesystem path
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'mfussenegger/nvim-dap'
   Plug 'nvim-lua/plenary.nvim'  " dependency for diffview.nvim
@@ -230,7 +231,13 @@ if has('nvim')
     local cmp = require("cmp")
     cmp.setup {
       sources = {
-        { name = 'nvim_lsp'}
+        { name = 'nvim_lsp'},
+        {
+          name = 'path',
+          option = {
+            trailing_slash = true
+          },
+        },
       },
       -- SEE: https://github.com/hrsh7th/nvim-cmp/issues/231#issuecomment-1098175017
       mapping = cmp.mapping.preset.insert()
