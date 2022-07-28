@@ -73,9 +73,6 @@ endif
 " vim-plug
 call plug#begin('~/.vim/plugged')
 
-" On-demend loading
-Plug 'scrooloose/nerdtree'
-
 Plug 'tpope/vim-sensible'
 Plug 'ryanoasis/vim-devicons'
 Plug 'prabirshrestha/async.vim'
@@ -132,6 +129,9 @@ Plug 'tpope/vim-fugitive'
 
 "------------------------------------------------------------------------------
 if !has('nvim') " vim(not neovim) plugins only
+  Plug 'scrooloose/nerdtree'
+    let NERDTreeShowHidden=1  " always show hidden files
+
   " LSP Plugins
   Plug 'prabirshrestha/vim-lsp'
     let g:lsp_diagnostics_echo_cursor = 1
@@ -160,6 +160,7 @@ else " neovim plugins only
   Plug 'kexplo/koach.nvim'
 
   Plug 'kyazdani42/nvim-web-devicons'
+  Plug 'kyazdani42/nvim-tree.lua'
   Plug 'neovim/nvim-lspconfig'
   Plug 'hrsh7th/nvim-cmp'
   Plug 'hrsh7th/cmp-nvim-lsp'
@@ -245,6 +246,8 @@ if has('nvim')
         additional_vim_regex_highlighting = false,
       },
     }
+
+    require('nvim-tree').setup()
 
     require("lsp_signature").setup()
 EOF
@@ -412,7 +415,12 @@ function! s:SmartNERDTreeToggle()
     NERDTreeToggle
   endif
 endfunction
-map <F2> :call <SID>SmartNERDTreeToggle()<CR>
+
+if !has('nvim')
+  map <F2> :call <SID>SmartNERDTreeToggle()<CR>
+else
+  map <F2> :NvimTreeToggle<CR>
+endif
 
 " Symbols
 autocmd vimrc VimEnter *
