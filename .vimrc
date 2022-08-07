@@ -82,8 +82,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-sleuth'
 Plug 'RRethy/vim-illuminate'
-Plug 'wellle/context.vim'
-  let g:context_enabled = 1
 Plug 'hotwatermorning/auto-git-diff'
 Plug 'sheerun/vim-polyglot'
 Plug 'sbdchd/neoformat'
@@ -133,6 +131,9 @@ if !has('nvim') " vim(not neovim) plugins only
   Plug 'scrooloose/nerdtree'
     let NERDTreeShowHidden=1  " always show hidden files
 
+  Plug 'wellle/context.vim'
+    let g:context_enabled = 1
+
   " LSP Plugins
   Plug 'prabirshrestha/vim-lsp'
     let g:lsp_diagnostics_echo_cursor = 1
@@ -167,6 +168,7 @@ else " neovim plugins only
   Plug 'hrsh7th/cmp-nvim-lsp'
   Plug 'hrsh7th/cmp-path' " nvim-cmp path source for filesystem path
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'nvim-treesitter/nvim-treesitter-context'
   Plug 'mfussenegger/nvim-dap'
   Plug 'nvim-lua/plenary.nvim'  " dependency for diffview.nvim
   Plug 'sindrets/diffview.nvim'
@@ -253,6 +255,15 @@ if has('nvim')
         enable = true,
         additional_vim_regex_highlighting = false,
       },
+    }
+
+    require("treesitter-context").setup {
+      enable = true,
+      max_lines = 0, -- no limit
+      trim_scope = 'outer',
+      zindex = 20,
+      mode = 'cursor',
+      separator = nil, -- Separator between context and content. Should be a single character string, like '-'.
     }
 
     require('nvim-tree').setup()
