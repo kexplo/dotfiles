@@ -266,7 +266,15 @@ if has('nvim')
       separator = nil, -- Separator between context and content. Should be a single character string, like '-'.
     }
 
-    require('nvim-tree').setup()
+    require('nvim-tree').setup {
+      view = {
+        mappings = {
+          list = {
+              { key = "<CR>", action = "vsplit"}
+          }
+        }
+      }
+    }
 
     require("lsp_signature").setup()
 EOF
