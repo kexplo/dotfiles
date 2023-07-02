@@ -1,8 +1,9 @@
-"==============================================================================
-" Basic configs
-"==============================================================================
-
 " vim:ft=vim:et:ts=2:sw=2:sts=2:
+
+"
+" Basic configs
+"
+
 " encoding 설정이 맨 위에 있어야 gvim에서 메뉴가 깨지지 않는다.
 set encoding=utf-8
 set fileformats=unix,mac,dos
@@ -11,20 +12,16 @@ set fileencodings=ucs-bom,utf-8,default,latin1
 set noswapfile
 set nocompatible
 set nofoldenable
-
-" use softtab
-set expandtab
-"set tab size
-set tabstop=4
-set sw=4
-set sts=4
-set autoindent
+set hls
 
 "use backspace
 set bs=indent,eol,start
 
-" Highlight search
-set hls
+" tab
+set expandtab
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
 
 " tab visualize
 "  examples:
@@ -32,10 +29,17 @@ set hls
 "   set listchars=eol:⏎,tab:␉·,trail:␠,nbsp:⎵
 set list lcs=tab:\|·
 
+" indentation
+set autoindent
+
 "syntax highlight on
 syntax on
 
 colorscheme desert
+
+"
+" Terminal or OS specific configs
+"
 
 let s:windows = has('win32') || has('win64')
 let s:macos = has('mac')
@@ -60,17 +64,24 @@ if has('nvim')
 endif
 
 if has('gui_running')
-  "set gvim font
-  set guifont=JetBrainsMonoNL_Nerd_Font_Mono:h10
+  if exists(':GuiFont')
+    " nvim-qt
+    GuiFont! JetBrainsMonoNL_Nerd_Font_Mono:h10
+  else
+    "set gvim font
+    set guifont=JetBrainsMonoNL_Nerd_Font_Mono:h10
+  endif
   set lines=40
   set columns=158
 endif
 
-"==============================================================================
-" Plugins
-"==============================================================================
+" =============================================================================
 
-" vim-plug
+"
+" Plugins
+"
+
+" use vim-plug
 call plug#begin('~/.vim/plugged')
 
 Plug 'tpope/vim-sensible'
@@ -126,8 +137,7 @@ Plug 'Shougo/vimproc.vim'
 
 Plug 'tpope/vim-fugitive'
 
-"------------------------------------------------------------------------------
-if !has('nvim') " vim(not neovim) plugins only
+if !has('nvim') " vim(not neovim) plugins
   Plug 'scrooloose/nerdtree'
     let NERDTreeShowHidden=1  " always show hidden files
 
@@ -158,28 +168,41 @@ if !has('nvim') " vim(not neovim) plugins only
   Plug 'prabirshrestha/asyncomplete-lsp.vim'
   Plug 'liuchengxu/vista.vim'
     let g:vista_default_executive = 'vim_lsp'
-else " neovim plugins only
-  Plug 'kexplo/koach.nvim'
+
+else " neovim plugins
 
   Plug 'kyazdani42/nvim-web-devicons'
-  Plug 'kyazdani42/nvim-tree.lua'
+  "Plug 'kyazdani42/nvim-tree.lua'
+
+  " lsp plugins
   Plug 'neovim/nvim-lspconfig'
   Plug 'hrsh7th/nvim-cmp'
   Plug 'hrsh7th/cmp-nvim-lsp'
   Plug 'hrsh7th/cmp-path' " nvim-cmp path source for filesystem path
+
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'nvim-treesitter/nvim-treesitter-context'
+
   Plug 'mfussenegger/nvim-dap'
   Plug 'nvim-lua/plenary.nvim'  " dependency for diffview.nvim
   Plug 'sindrets/diffview.nvim'
   Plug 'simrat39/symbols-outline.nvim'
+
   Plug 'folke/trouble.nvim'
   Plug 'ray-x/lsp_signature.nvim'
+
+  Plug 'MunifTanjim/nui.nvim' " for neo-tree
+  Plug 'nvim-lua/plenary.nvim' " for neo-tree
+  Plug 'nvim-neo-tree/neo-tree.nvim'
 endif
 
 call plug#end()
 
-if has('nvim')
+"
+" neovim plugin configs
+"
+
+  " lsp plugin configs
   lua << EOF
     local nvim_lsp = require('lspconfig')
     -- Use an on_attach function to only map the following keys
@@ -216,7 +239,7 @@ if has('nvim')
 
     -- Add additional capabilities supported by nvim-cmp
     local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+    capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
     -- Use a loop to conveniently call 'setup' on multiple servers and
     -- map buffer local keybindings when the language server attaches
@@ -244,13 +267,17 @@ if has('nvim')
       -- SEE: https://github.com/hrsh7th/nvim-cmp/issues/231#issuecomment-1098175017
       mapping = cmp.mapping.preset.insert()
     }
+EOF
 
+  lua << EOF
     require("trouble").setup {
-      position = "right"
+      position = "bottom"
     }
+EOF
 
+  lua << EOF
     require("nvim-treesitter.configs").setup {
-      ensure_installed = "maintained",
+      ensure_installed = {'c', 'vimdoc', 'vim', 'bash', 'c_sharp', 'cmake', 'cpp', 'css', 'cuda', 'diff', 'dockerfile', 'git_config', 'git_rebase', 'gitattributes', 'gitcommit', 'gitignore', 'go', 'gosum', 'gomod', 'graphql', 'hcl', 'hlsl', 'html', 'htmldjango', 'http', 'ini', 'javascript', 'jq', 'json', 'json5', 'ledger', 'lua', 'luadoc', 'make', 'markdown', 'mermaid', 'proto', 'python', 'regex', 'rust', 'sql', 'terraform', 'tsx', 'typescript', 'yaml'},
       highlight = {
         enable = true,
         additional_vim_regex_highlighting = false,
@@ -265,22 +292,24 @@ if has('nvim')
       mode = 'cursor',
       separator = nil, -- Separator between context and content. Should be a single character string, like '-'.
     }
-
-    require('nvim-tree').setup {
-      view = {
-        mappings = {
-          list = {
-              { key = "<CR>", action = "vsplit"}
-          }
-        }
-      }
-    }
-
-    require("lsp_signature").setup()
 EOF
-endif
 
-"==============================================================================
+lua << EOF
+  require('neo-tree').setup({
+   filesystem = {
+     filtered_items = {
+       hide_dotfiles = false,
+       hide_hidden = false,
+     }
+   }
+  })
+EOF
+
+lua require('symbols-outline').setup()
+
+"
+" augroup defines
+"
 
 augroup vimrc
   autocmd!
@@ -340,9 +369,9 @@ augroup filetype_go
   autocmd BufWritePre *.go undojoin | Neoformat
 augroup END
 
-"==============================================================================
-" FZF
-"==============================================================================
+"
+" FZF config
+"
 
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview('right'), <bang>0)
@@ -393,9 +422,9 @@ if executable('rg')
         \   <bang>0)
 endif
 
-"==============================================================================
+"
 " Key mappings
-"==============================================================================
+"
 
 if exists(':LspDocumentDiagnostics')
   " vim-lsp key mappings
@@ -407,6 +436,8 @@ if exists(':LspDocumentDiagnostics')
   " nnoremap <F12> :tab split<cr>:LspDefinition<cr>
   " nnoremap <F12> :sp<cr>:LspDefinition<cr>
   " nnoremap <F12> :vsp<cr>:LspDefinition<cr>
+else
+  nnoremap <F4> :TroubleToggle<CR>
 endif
 
 " vim-easy-align
@@ -452,7 +483,8 @@ endfunction
 if !has('nvim')
   map <F2> :call <SID>SmartNERDTreeToggle()<CR>
 else
-  map <F2> :NvimTreeToggle<CR>
+  "map <F2> :NvimTreeToggle<CR>
+  map <F2> :Neotree toggle left reveal_force_cwd<CR>
 endif
 
 " Symbols
