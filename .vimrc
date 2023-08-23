@@ -58,6 +58,8 @@ else
   endif
 endif
 
+set termguicolors
+
 if has('nvim')
   let g:loaded_ruby_provider = 1
   set inccommand=split
@@ -99,19 +101,6 @@ Plug 'sbdchd/neoformat'
   let g:neoformat_enabled_python = ['autopep8', 'isort', 'black']
   let g:neoformat_run_all_formatters = 1
 
-Plug 'Yggdroot/indentLine'
-  let g:indentLine_char = '┆'
-  let g:indentLine_color_term = 239
-  let g:indentLine_color_gui = '#A4E57E'
-
-  augroup off_indentline_when_slow_filetypes
-    autocmd!
-    autocmd FileType * let g:indentLine_enabled = 1
-    autocmd FileType * let g:indentLine_setConceal = 0
-    autocmd FileType json,yaml let g:indentLine_enabled = 0
-    autocmd FileType json,yaml let g:indentLine_setConceal = 0
-  augroup END
-
 " customizing any colorscheme via '~/.vim/after/colors'
 Plug 'vim-scripts/AfterColors.vim'
 
@@ -151,17 +140,6 @@ if !has('nvim') " vim(not neovim) plugins
     let g:lsp_document_code_action_signs_enabled = 0
     let g:lsp_settings_filetype_python = ['jedi-language-server']
     let g:lsp_settings_filetype_go = ['golangci-lint-langserver', 'gopls']
-    let g:lsp_settings = {
-\   'yaml-language-server': {
-\     'workspace_config': {
-\       'yaml': {
-\         'schemas': {
-\           'kubernetes': '*',
-\         }
-\       }
-\     }
-\   }
-\ }
 
   Plug 'mattn/vim-lsp-settings'
   Plug 'prabirshrestha/asyncomplete.vim'
@@ -194,6 +172,13 @@ else " neovim plugins
   Plug 'MunifTanjim/nui.nvim' " for neo-tree
   Plug 'nvim-lua/plenary.nvim' " for neo-tree
   Plug 'nvim-neo-tree/neo-tree.nvim'
+
+  Plug 'lukas-reineke/indent-blankline.nvim'
+  Plug 'cuducos/yaml.nvim'
+
+  Plug 'nvim-telescope/telescope.nvim'
+
+  Plug 'pwntester/octo.nvim'
 endif
 
 call plug#end()
@@ -201,57 +186,57 @@ call plug#end()
 "
 " neovim plugin configs
 "
+if has('nvim')
 
   " lsp plugin configs
   lua << EOF
-    local nvim_lsp = require('lspconfig')
-    -- Use an on_attach function to only map the following keys
+    -- Global mappings.
+    -- See `:help vim.diagnostic.*` for documentation on any of the below functions
+    vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
+    vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+    vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+    vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
+
+    -- Use LspAttach autocommand to only map the following keys
     -- after the language server attaches to the current buffer
-    local on_attach = function(client, bufnr)
-      local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-      local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+    vim.api.nvim_create_autocmd('LspAttach', {
+      group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+      callback = function(ev)
+        -- Enable completion triggered by <c-x><c-o>
+        vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
-      -- Enable completion triggered by <c-x><c-o>
-      buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-      -- Mappings.
-      local opts = { noremap=true, silent=true }
-
-      -- See `:help vim.lsp.*` for documentation on any of the below functions
-      buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-      buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-      buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-      buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-      buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-      --buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-      --buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-      --buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-      --buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-      --buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-      --buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-      buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-      buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-      buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-      buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-      buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-      buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-    end
+        -- Buffer local mappings.
+        -- See `:help vim.lsp.*` for documentation on any of the below functions
+        local opts = { buffer = ev.buf }
+        vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+        vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+        vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+        vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+        --vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
+        --vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
+        --vim.keymap.set('n', '<space>wl', function()
+        --  print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+        --end, opts)
+        --vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
+        --vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
+        --vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
+        vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+        vim.keymap.set('n', '<space>f', function()
+          vim.lsp.buf.format { async = true }
+        end, opts)
+      end,
+    })
 
     -- Add additional capabilities supported by nvim-cmp
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
-    -- Use a loop to conveniently call 'setup' on multiple servers and
-    -- map buffer local keybindings when the language server attaches
-    local servers = { 'jedi_language_server', 'gopls' }
-    for _, lsp in ipairs(servers) do
-      nvim_lsp[lsp].setup {
-        on_attach = on_attach,
-        flags = {
-          debounce_text_changes = 150,
-        }
-      }
-    end
+    local lspconfig = require('lspconfig')
+    lspconfig.jedi_language_server.setup {}
+    lspconfig.gopls.setup {}
+    lspconfig.golangci_lint_ls.setup {}
+    lspconfig.bashls.setup {}
 
     local cmp = require("cmp")
     cmp.setup {
@@ -303,9 +288,50 @@ lua << EOF
      }
    }
   })
+
+  -- configs for 'pwntester/octo.nvim',
+  -- requires:
+  --  'nvim-lua/plenary.nvim',
+  --  'nvim-telescope/telescope.nvim',
+  --  'kyazdani42/nvim-web-devicons',
+  require"octo".setup({
+    github_hostname = "oss.navercorp.com";
+    issues = {
+      order_by = {
+        field = "UPDATED_AT",
+        direction = "DESC"
+      }
+    },
+    pull_requests = {
+      order_by = {
+        field = "UPDATED_AT",
+        direction = "DESC"
+      }
+    },
+  })
 EOF
 
 lua require('symbols-outline').setup()
+
+lua << EOF
+  require("indent_blankline").setup {
+    space_char_blankline = " ",
+    show_current_context = true,
+    show_current_context_start = true,
+}
+EOF
+
+lua << EOF
+require('illuminate').configure({
+  providers = {
+    'lsp',
+    'treesitter',
+    'regex',
+  }
+})
+EOF
+
+endif
 
 "
 " augroup defines
