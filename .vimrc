@@ -65,18 +65,6 @@ if has('nvim')
   set inccommand=split
 endif
 
-if has('gui_running')
-  if exists(':GuiFont')
-    " nvim-qt
-    GuiFont! JetBrainsMonoNL_Nerd_Font_Mono:h10
-  else
-    "set gvim font
-    set guifont=JetBrainsMonoNL_Nerd_Font_Mono:h10
-  endif
-  set lines=40
-  set columns=158
-endif
-
 " =============================================================================
 
 "
