@@ -25,9 +25,9 @@ set softtabstop=4
 
 " tab visualize
 "  examples:
-"   set list lcs=tab:\|\
+"   set list lcs=tab:\|·
 "   set listchars=eol:⏎,tab:␉·,trail:␠,nbsp:⎵
-set list lcs=tab:\|·
+set list lcs=tab:\▎·
 
 " indentation
 set autoindent
