@@ -146,6 +146,8 @@ else " neovim plugins
   Plug 'hrsh7th/cmp-nvim-lsp'
   Plug 'hrsh7th/cmp-path' " nvim-cmp path source for filesystem path
 
+  " Plug 'mfussenegger/nvim-lint'
+
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'nvim-treesitter/nvim-treesitter-context'
 
@@ -225,6 +227,7 @@ if has('nvim')
     lspconfig.gopls.setup {}
     lspconfig.golangci_lint_ls.setup {}
     lspconfig.bashls.setup {}
+    lspconfig.eslint.setup {}
 
     local cmp = require("cmp")
     cmp.setup {
@@ -253,6 +256,11 @@ EOF
       ensure_installed = {'c', 'vimdoc', 'vim', 'bash', 'c_sharp', 'cmake', 'cpp', 'css', 'cuda', 'diff', 'dockerfile', 'git_config', 'git_rebase', 'gitattributes', 'gitcommit', 'gitignore', 'go', 'gosum', 'gomod', 'graphql', 'hcl', 'hlsl', 'html', 'htmldjango', 'http', 'ini', 'javascript', 'jq', 'json', 'json5', 'ledger', 'lua', 'luadoc', 'make', 'markdown', 'mermaid', 'proto', 'python', 'regex', 'rust', 'sql', 'terraform', 'tsx', 'typescript', 'yaml'},
       highlight = {
         enable = true,
+        -- workaround for performance degraded issue
+        -- REF: https://github.com/nvim-treesitter/nvim-treesitter/issues/556#issuecomment-1157664778
+        disable = function(lang, bufnr)
+          return lang == "vim"
+        end,
         additional_vim_regex_highlighting = false,
       },
     }
@@ -270,10 +278,14 @@ EOF
 lua << EOF
   require('neo-tree').setup({
    filesystem = {
+     bind_to_cwd = false, -- true creates a 2-way binding between vim's cwd and neo-tree's root
      filtered_items = {
        hide_dotfiles = false,
        hide_hidden = false,
      }
+   },
+   source_selector = {
+     winbar = true,
    }
   })
 
