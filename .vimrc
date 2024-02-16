@@ -557,6 +557,10 @@ augroup END
 "prevent append EOF(End Of Line).
 "set binary noeol
 
+" disable fzf.vim's Windows command
+" ref: https://github.com/junegunn/fzf.vim/issues/1084
+command! -nargs=* W w
+
 " Load local config
 if filereadable($HOME . '/.vimrc.local')
   source $HOME/.vimrc.local
