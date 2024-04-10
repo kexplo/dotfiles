@@ -167,8 +167,6 @@ else " neovim plugins
   Plug 'cuducos/yaml.nvim'
 
   Plug 'nvim-telescope/telescope.nvim'
-
-  Plug 'pwntester/octo.nvim'
 endif
 
 call plug#end()
@@ -287,27 +285,6 @@ lua << EOF
    source_selector = {
      winbar = true,
    }
-  })
-
-  -- configs for 'pwntester/octo.nvim',
-  -- requires:
-  --  'nvim-lua/plenary.nvim',
-  --  'nvim-telescope/telescope.nvim',
-  --  'kyazdani42/nvim-web-devicons',
-  require"octo".setup({
-    github_hostname = "oss.navercorp.com";
-    issues = {
-      order_by = {
-        field = "UPDATED_AT",
-        direction = "DESC"
-      }
-    },
-    pull_requests = {
-      order_by = {
-        field = "UPDATED_AT",
-        direction = "DESC"
-      }
-    },
   })
 EOF
 
