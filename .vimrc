@@ -108,6 +108,8 @@ Plug 'junegunn/fzf.vim'
 
 Plug 'Glench/Vim-Jinja2-Syntax'
 
+Plug 'github/copilot.vim'
+
 " typescript
 Plug 'HerringtonDarkholme/yats.vim', { 'for': 'typescript' }
 Plug 'Shougo/vimproc.vim'
