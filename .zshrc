@@ -65,6 +65,7 @@ zmodload -F zsh/stat b:zstat
 # Edit current command line
 autoload -U edit-command-line
 zle -N edit-command-line
+zstyle :zle:edit-command-line editor nvim -f
 bindkey '\C-x\C-e' edit-command-line
 
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=yellow'
