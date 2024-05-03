@@ -78,7 +78,7 @@ export HISTSIZE=10000
 export SAVEHIST=10000
 
 if is_osx; then
-  alias ls='ls -G'
+  alias ls='ls --color=auto'
 else
   alias ls='ls --color=tty'
 fi
