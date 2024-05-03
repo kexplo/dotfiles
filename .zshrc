@@ -3,9 +3,12 @@
 source "$HOME/stdlib.sh"
 source "$HOME/.zplug/init.zsh"
 
+# disable async git prompt
+zstyle ':omz:alpha:lib:git' async-prompt no
+
 zplug "lib/theme-and-appearance", from:oh-my-zsh
 zplug "lib/completion", from:oh-my-zsh
-zplug "plugins/git", from:oh-my-zsh
+zplug "lib/git", from:oh-my-zsh
 zplug "plugins/virtualenv", from:oh-my-zsh
 zplug "plugins/zsh-navigation-tools", from:oh-my-zsh
 zplug "plugins/kube-ps1", from:oh-my-zsh
