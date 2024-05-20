@@ -86,7 +86,7 @@ Plug 'RRethy/vim-illuminate'
 Plug 'hotwatermorning/auto-git-diff'
 Plug 'sheerun/vim-polyglot'
 Plug 'sbdchd/neoformat'
-  let g:neoformat_enabled_python = ['autopep8', 'isort', 'black']
+  let g:neoformat_enabled_python = ['autopep8', 'isort', 'black', 'ruff']
   let g:neoformat_run_all_formatters = 1
 
 " customizing any colorscheme via '~/.vim/after/colors'
