@@ -324,13 +324,6 @@ augroup filetype_msbuild
   autocmd BufRead,BufNewFile Directory.Build.targets setfiletype xml
 augroup END
 
-"google protocol buffer
-augroup filetype_proto
-  autocmd!
-  autocmd BufRead,BufNewFile *.proto setfiletype proto
-  autocmd FileType proto source $VIM\vimfiles\syntax\proto.vim
-augroup END
-
 " .md Filetype mappings
 augroup filetype_markdown
   autocmd!
