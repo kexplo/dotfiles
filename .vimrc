@@ -434,7 +434,7 @@ if exists(':LspDocumentDiagnostics')
   " nnoremap <F12> :sp<cr>:LspDefinition<cr>
   " nnoremap <F12> :vsp<cr>:LspDefinition<cr>
 else
-  nnoremap <F4> :TroubleToggle<CR>
+  nnoremap <F4> :Trouble diagnostics toggle<CR>
 endif
 
 " vim-easy-align
