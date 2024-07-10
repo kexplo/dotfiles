@@ -156,7 +156,7 @@ else " neovim plugins
   Plug 'mfussenegger/nvim-dap'
   Plug 'nvim-lua/plenary.nvim'  " dependency for diffview.nvim
   Plug 'sindrets/diffview.nvim'
-  Plug 'simrat39/symbols-outline.nvim'
+  Plug 'hedyhli/outline.nvim'
 
   Plug 'folke/trouble.nvim'
   Plug 'ray-x/lsp_signature.nvim'
@@ -292,7 +292,7 @@ lua << EOF
   })
 EOF
 
-lua require('symbols-outline').setup()
+lua require('outline').setup()
 
 lua << EOF
   -- indent-blankline
@@ -488,8 +488,8 @@ endif
 autocmd vimrc VimEnter *
 \ if exists(':Vista')
 \|  map <F3> :Vista<CR>
-\|elseif exists(':SymbolsOutline')
-\|  map <F3> :SymbolsOutline<CR>
+\|elseif exists(':Outline')
+\|  map <F3> :Outline<CR>
 \|endif
 
 " fzf
