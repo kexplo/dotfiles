@@ -27,7 +27,11 @@ set softtabstop=4
 "  examples:
 "   set list lcs=tab:\|·
 "   set listchars=eol:⏎,tab:␉·,trail:␠,nbsp:⎵
-set list lcs=tab:\▎·
+if !has('nvim')
+  set list lcs=tab:\|·
+else
+  set list lcs=tab:\▎·
+endif
 
 " indentation
 set autoindent
@@ -108,11 +112,16 @@ Plug 'junegunn/fzf.vim'
 
 Plug 'Glench/Vim-Jinja2-Syntax'
 
-Plug 'github/copilot.vim'
-
-" typescript
-Plug 'HerringtonDarkholme/yats.vim', { 'for': 'typescript' }
-Plug 'Shougo/vimproc.vim'
+" typescript & jsx
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+  " set filetypes as typescriptreact
+  augroup set_filetypes_as_typescriptreact
+    autocmd!
+    autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
+  augroup END
+Plug 'HerringtonDarkholme/yats.vim', { 'for': ['javascript', 'typescript', 'typescriptreact'] }
+Plug 'maxmellon/vim-jsx-pretty', {  'for': ['javascript', 'typescript', 'typescriptreact'] }
 
 Plug 'tpope/vim-fugitive'
 
@@ -169,6 +178,8 @@ else " neovim plugins
   Plug 'cuducos/yaml.nvim'
 
   Plug 'nvim-telescope/telescope.nvim'
+
+  Plug 'github/copilot.vim'
 endif
 
 call plug#end()
@@ -230,6 +241,7 @@ if has('nvim')
     lspconfig.eslint.setup {}
     lspconfig.tsserver.setup {}
     lspconfig.ruff_lsp.setup {}
+    lspconfig.rust_analyzer.setup {}
 
     local cmp = require("cmp")
     cmp.setup {
