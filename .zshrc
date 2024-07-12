@@ -85,7 +85,6 @@ fi
 alias l='ls'
 
 alias tmux='tmux -2'
-alias fzf="fzf --preview 'head -100 {}'"
 alias rg='rg --hidden'
 alias utc='date -u "+%x %T %Z"'
 
@@ -122,6 +121,13 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
 export PATH="$PATH:/usr/local/go/bin"
 export LESS='-RXF'
+
+# fzf
+alias fzfp="fzf --preview 'head -100 {}'"
+if which fzf > /dev/null; then
+  source <(fzf --zsh)
+fi
+export FZF_DEFAULT_OPTS='--tmux center'
 
 # Linuxbrew
 export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
