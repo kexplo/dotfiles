@@ -1,6 +1,5 @@
 #!/usr/bin/env zsh
 
-source "$HOME/stdlib.sh"
 source "$HOME/.zplug/init.zsh"
 
 # disable async git prompt
@@ -77,7 +76,8 @@ export HISTFILE="$HOME/.zsh_history"
 export HISTSIZE=10000
 export SAVEHIST=10000
 
-if is_osx; then
+# if it is macOS
+if [[ "$(uname)" == "Darwin" ]]; then
   alias ls='ls --color=auto'
 else
   alias ls='ls --color=tty'

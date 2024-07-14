@@ -47,7 +47,6 @@ RC_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 check_dependency
 
-sym_link "$RC_DIR/stdlib.sh" "$HOME/stdlib.sh"
 sym_link "$RC_DIR/.vimrc" "$HOME/.vimrc"
 sym_link "$RC_DIR/.zshrc" "$HOME/.zshrc"
 sym_link "$RC_DIR/.gitconfig" "$HOME/.gitconfig"
