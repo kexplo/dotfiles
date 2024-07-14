@@ -1,32 +1,58 @@
 #!/usr/bin/env zsh
+#
+# configs that should be set before p10k instant prompt
+#
 
-source "$HOME/.zplug/init.zsh"
-
-# disable async git prompt
-zstyle ':omz:alpha:lib:git' async-prompt no
-
-zplug "lib/theme-and-appearance", from:oh-my-zsh
-zplug "lib/completion", from:oh-my-zsh
-zplug "lib/git", from:oh-my-zsh
-zplug "plugins/virtualenv", from:oh-my-zsh
-zplug "plugins/zsh-navigation-tools", from:oh-my-zsh
-zplug "plugins/kube-ps1", from:oh-my-zsh
-
-zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-completions"
-zplug "zsh-users/zsh-syntax-highlighting"
-zplug "zsh-users/zsh-history-substring-search"
-
-zplug "agkozak/zsh-z"
-
-zplug "kexplo/dotfiles", as:theme, use:kexplo.zsh-theme
-
-# zplug load --verbose
-zplug load
+# direnv: https://github.com/romkatv/powerlevel10k?tab=readme-ov-file#how-do-i-initialize-direnv-when-using-instant-prompt
+(( ${+commands[direnv]} )) && emulate zsh -c "$(direnv export zsh)"
 
 ############################################################################################
 
-# == basics
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# direnv: https://github.com/romkatv/powerlevel10k?tab=readme-ov-file#how-do-i-initialize-direnv-when-using-instant-prompt
+(( ${+commands[direnv]} )) && emulate zsh -c "$(direnv hook zsh)"
+
+############################################################################################
+# zplug
+#
+if [[ -f "$HOME/.zplug/init.zsh" ]]; then
+  source "$HOME/.zplug/init.zsh"
+
+  # disable async git prompt
+  # zstyle ':omz:alpha:lib:git' async-prompt no
+
+  zplug "lib/theme-and-appearance", from:oh-my-zsh
+  zplug "lib/completion", from:oh-my-zsh
+  zplug "lib/git", from:oh-my-zsh
+  zplug "plugins/virtualenv", from:oh-my-zsh
+  zplug "plugins/zsh-navigation-tools", from:oh-my-zsh
+  zplug "plugins/kube-ps1", from:oh-my-zsh
+
+  zplug "zsh-users/zsh-autosuggestions"
+  zplug "zsh-users/zsh-completions"
+  zplug "zsh-users/zsh-syntax-highlighting"
+  zplug "zsh-users/zsh-history-substring-search"
+
+  zplug "agkozak/zsh-z"
+
+  # zplug "kexplo/dotfiles", as:theme, use:kexplo.zsh-theme
+  zplug romkatv/powerlevel10k, as:theme, depth:1
+
+  # zplug load --verbose
+  zplug load
+fi
+
+############################################################################################
+# zsh settings
+#
+
+# === basics
 unsetopt auto_cd
 setopt interactive
 setopt interactivecomments
@@ -59,8 +85,6 @@ setopt noflowcontrol
 # === Enable zstat
 zmodload -F zsh/stat b:zstat
 
-############################################################################################
-
 # Edit current command line
 autoload -U edit-command-line
 zle -N edit-command-line
@@ -75,6 +99,10 @@ autoload -U colors && colors
 export HISTFILE="$HOME/.zsh_history"
 export HISTSIZE=10000
 export SAVEHIST=10000
+
+############################################################################################
+# zshrc
+#
 
 # if it is macOS
 if [[ "$(uname)" == "Darwin" ]]; then
@@ -124,9 +152,7 @@ export LESS='-RXF'
 
 # fzf
 alias fzfp="fzf --preview 'head -100 {}'"
-if which fzf > /dev/null; then
-  source <(fzf --zsh)
-fi
+(( ${+commands[fzf]} )) && source <(fzf --zsh)
 export FZF_DEFAULT_OPTS='--tmux center'
 
 # Linuxbrew
@@ -134,17 +160,13 @@ export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 export MANPATH="/home/linuxbrew/.linuxbrew/share/man:$MANPATH"
 export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:$INFOPATH"
 
-# pipsi
-export PATH="$HOME/.local/bin:$PATH"
-
 # pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
-
-# direnv
-if which direnv >/dev/null; then eval "$(direnv hook zsh)"; fi
+if (( ${+commands[pyenv]} )); then
+  export PYENV_ROOT="$HOME/.pyenv"
+  [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init -)"
+  (( ${+commands[pyenv-virtualenv-init]} )) && eval "$(pyenv virtualenv-init -)"
+fi
 
 # enable Docker buildkit
 export DOCKER_BUILDKIT=1
@@ -152,6 +174,54 @@ export COMPOSE_DOCKER_CLI_BUILD=1
 
 # snap
 export PATH="/snap/bin:$PATH"
+
+############################################################################################
+# p10k
+#
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+if [[ -f ~/.p10k.zsh ]]; then
+  source ~/.p10k.zsh
+
+  typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
+    # =========================[ Line #1 ]=========================
+    # os_icon               # os identifier
+    virtualenv              # python virtual environment (https://docs.python.org/3/library/venv.html)
+    dir                     # current directory
+    vcs                     # git status
+    # =========================[ Line #2 ]=========================
+    newline                 # \n
+    prompt_char             # prompt symbol
+  )
+
+  typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
+    status                  # exit code of the last command
+    command_execution_time  # duration of the last command
+    background_jobs         # presence of background jobs
+    kubecontext             # current kubernetes context (https://kubernetes.io/)
+    aws                     # aws profile (https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html)
+    context                 # user@hostname
+    time                    # current time
+    # =========================[ Line #2 ]=========================
+    newline
+  )
+
+  # always show kubecontext
+  unset POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND
+
+  # virtualenv
+  typeset -g POWERLEVEL9K_VIRTUALENV_LEFT_DELIMITER='('
+  typeset -g POWERLEVEL9K_VIRTUALENV_RIGHT_DELIMITER=')'
+  typeset -g POWERLEVEL9K_VIRTUALENV_SHOW_PYTHON_VERSION=false
+  typeset -g POWERLEVEL9K_VIRTUALENV_SHOW_WITH_PYENV=false
+
+  # status
+  typeset -g POWERLEVEL9K_STATUS_OK=false
+  typeset -g POWERLEVEL9K_STATUS_ERROR=true
+  typeset -g POWERLEVEL9K_STATUS_VERBOSE_SIGNAME=true
+fi
+
+############################################################################################
 
 # Load local config
 if [[ -f ~/.zshrc.local ]]; then
