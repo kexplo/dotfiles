@@ -329,6 +329,10 @@ require('neogen').setup {
 }
 EOF
 
+lua << EOF
+require('lsp_signature').setup()
+EOF
+
 endif
 
 "
