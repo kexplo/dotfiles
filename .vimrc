@@ -107,7 +107,7 @@ Plug 'rhysd/clever-f.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'junegunn/vim-easy-align'
 
-Plug 'junegunn/fzf'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 Plug 'Glench/Vim-Jinja2-Syntax'
@@ -180,6 +180,8 @@ else " neovim plugins
   Plug 'nvim-telescope/telescope.nvim'
 
   Plug 'github/copilot.vim'
+
+  Plug 'danymat/neogen'
 endif
 
 call plug#end()
@@ -319,6 +321,12 @@ require('illuminate').configure({
     'regex',
   }
 })
+EOF
+
+lua << EOF
+require('neogen').setup {
+  enabled = true
+}
 EOF
 
 endif
