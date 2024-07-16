@@ -219,6 +219,12 @@ if [[ -f ~/.p10k.zsh ]]; then
   typeset -g POWERLEVEL9K_STATUS_OK=false
   typeset -g POWERLEVEL9K_STATUS_ERROR=true
   typeset -g POWERLEVEL9K_STATUS_VERBOSE_SIGNAME=true
+
+  # prompt char
+  typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VIINS_CONTENT_EXPANSION='$'
+
+  # always show context
+  unset POWERLEVEL9K_CONTEXT_{DEFAULT,SUDO}_{CONTENT,VISUAL_IDENTIFIER}_EXPANSION
 fi
 
 ############################################################################################
