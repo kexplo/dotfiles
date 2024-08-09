@@ -151,8 +151,13 @@ else " neovim plugins
   Plug 'kyazdani42/nvim-web-devicons'
   "Plug 'kyazdani42/nvim-tree.lua'
 
-  " lsp plugins
+  " LSP plugins
+  " It's important to set up the plugins in the following order:
+  Plug 'williamboman/mason.nvim'
+  Plug 'williamboman/mason-lspconfig.nvim'
   Plug 'neovim/nvim-lspconfig'
+
+  " LSP plugins
   Plug 'hrsh7th/nvim-cmp'
   Plug 'hrsh7th/cmp-nvim-lsp'
   Plug 'hrsh7th/cmp-path' " nvim-cmp path source for filesystem path
@@ -235,6 +240,8 @@ if has('nvim')
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
+    require('mason').setup()
+    require('mason-lspconfig').setup()
     local lspconfig = require('lspconfig')
     lspconfig.jedi_language_server.setup {}
     lspconfig.gopls.setup {}
