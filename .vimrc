@@ -167,7 +167,10 @@ else " neovim plugins
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'nvim-treesitter/nvim-treesitter-context'
 
+  " DAP plugins
   Plug 'mfussenegger/nvim-dap'
+  Plug 'mfussenegger/nvim-dap-python'
+
   Plug 'nvim-lua/plenary.nvim'  " dependency for diffview.nvim
   Plug 'sindrets/diffview.nvim'
   Plug 'hedyhli/outline.nvim'
@@ -338,6 +341,15 @@ EOF
 
 lua << EOF
 require('lsp_signature').setup()
+EOF
+
+lua << EOF
+-- nvim-dap-python
+vim.api.nvim_create_user_command('DapPython',
+  function(opts)
+    require('dap-python').setup('python')
+  end, {}
+)
 EOF
 
 endif
@@ -531,9 +543,26 @@ autocmd vimrc VimEnter *
 \|  vnoremap <leader>av y:Rg <C-R>"<CR>
 \|endif
 
-" insert current datetime
-nmap <F5> a<C-R>=strftime("%Y-%m-%d %I:%M:%S")<CR><Esc>
-imap <F5> <C-R>=strftime("%Y-%m-%d %I:%M:%S")<CR>
+" nvim-dap
+if has('nvim')
+  nnoremap <F5> :lua require('dap').continue()<CR>
+  nnoremap <F6> :lua require('dap').run_to_cursor()<CR>
+  nnoremap <F8> :lua require('dap').repl.toggle()<CR>
+
+  nnoremap <F9> :lua require('dap').toggle_breakpoint()<CR>
+  nnoremap <F10> :lua require('dap').step_over()<CR>
+  nnoremap <F11> :lua require('dap').step_into()<CR>
+  nnoremap <F12> :lua require('dap').step_out()<CR>
+
+  nnoremap <F12> :lua require('dap').terminate()<CR>
+endif
+
+" leave terminal mode
+tnoremap <Esc> <C-\><C-n>
+
+" " insert current datetime
+" nmap <F5> a<C-R>=strftime("%Y-%m-%d %I:%M:%S")<CR><Esc>
+" imap <F5> <C-R>=strftime("%Y-%m-%d %I:%M:%S")<CR>
 
 " remove ESC delay (neovim)
 augroup fast_esc
