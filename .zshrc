@@ -104,6 +104,8 @@ export SAVEHIST=10000
 # zshrc
 #
 
+alias vim='nvim'
+
 # if it is macOS
 if [[ "$(uname)" == "Darwin" ]]; then
   alias ls='ls --color=auto'
@@ -115,6 +117,9 @@ alias l='ls'
 alias tmux='tmux -2'
 alias rg='rg --hidden'
 alias utc='date -u "+%x %T %Z"'
+
+# WSL
+(( ${+commands[clip.exe]} )) && alias clip='clip.exe'
 
 alias git-cleanup-branch='git fetch --all -p && git branch -v | grep gone | cut -c 3- | awk '\''{print $1}'\'' | xargs git branch -D'
 
