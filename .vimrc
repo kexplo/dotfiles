@@ -258,9 +258,10 @@ if has('nvim')
     lspconfig.golangci_lint_ls.setup {}
     lspconfig.bashls.setup {}
     lspconfig.eslint.setup {}
-    lspconfig.tsserver.setup {}
-    lspconfig.ruff_lsp.setup {}
+    lspconfig.ts_ls.setup {}
+    lspconfig.ruff.setup {}
     lspconfig.rust_analyzer.setup {}
+    lspconfig.pyright.setup {}
 
     local cmp = require("cmp")
     cmp.setup {
