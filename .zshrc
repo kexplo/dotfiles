@@ -234,6 +234,13 @@ fi
 
 ############################################################################################
 
+function uvs() {
+    if [ ! -d .venv ]; then
+        uv venv
+    fi
+    source .venv/bin/activate
+}
+
 # Load local config
 if [[ -f ~/.zshrc.local ]]; then
   source ~/.zshrc.local
