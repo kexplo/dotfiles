@@ -190,6 +190,11 @@ else " neovim plugins
   Plug 'github/copilot.vim'
 
   Plug 'danymat/neogen'
+
+  Plug 'lewis6991/gitsigns.nvim'
+
+  Plug 'sphamba/smear-cursor.nvim'
+
 endif
 
 call plug#end()
@@ -352,6 +357,14 @@ vim.api.nvim_create_user_command('DapPython',
     require('dap-python').setup('python')
   end, {}
 )
+EOF
+
+lua << EOF
+require('gitsigns').setup()
+EOF
+
+lua << EOF
+require('smear_cursor').enabled = true
 EOF
 
 endif
