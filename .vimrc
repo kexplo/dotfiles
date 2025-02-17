@@ -243,8 +243,10 @@ if has('nvim')
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
+    -- It's important that you set up the plugins in the following order: mason, mason-lspconfig, lspconfg.
     require('mason').setup()
     require('mason-lspconfig').setup()
+
     local lspconfig = require('lspconfig')
     lspconfig.jedi_language_server.setup {}
     lspconfig.gopls.setup {}
