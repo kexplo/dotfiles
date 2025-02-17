@@ -188,6 +188,10 @@ else " neovim plugins
   Plug 'nvim-telescope/telescope.nvim'
 
   Plug 'github/copilot.vim'
+    let g:copilot_filetypes = {
+      \ 'gitcommit': v:true,
+      \ 'gitrebase': v:true,
+      \ }
 
   Plug 'danymat/neogen'
 
