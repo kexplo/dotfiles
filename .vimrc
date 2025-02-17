@@ -545,24 +545,21 @@ autocmd vimrc VimEnter *
 \|  vnoremap <leader>av y:Rg <C-R>"<CR>
 \|endif
 
-" nvim-dap
+"nvim-dap
 if has('nvim')
-  nnoremap <F5> :lua require('dap').continue()<CR>
-  nnoremap <F6> :lua require('dap').run_to_cursor()<CR>
-  nnoremap <F8> :lua require('dap').repl.toggle()<CR>
-
-  nnoremap <F9> :lua require('dap').toggle_breakpoint()<CR>
-  nnoremap <F10> :lua require('dap').step_over()<CR>
-  nnoremap <F11> :lua require('dap').step_into()<CR>
-  nnoremap <F12> :lua require('dap').step_out()<CR>
-
-  nnoremap <F12> :lua require('dap').terminate()<CR>
+  nnoremap <F5> :lua require'dap'.continue()<CR>
+  nnoremap <F6> :lua require'dap'.run_to_cursor()<CR>
+  nnoremap <F7> :lua require'dap'.repl.toggle()<CR>
+  nnoremap <F9> :lua require'dap'.toggle_breakpoint()<CR>
+  nnoremap <F10> :lua require'dap'.step_into()<CR>
+  nnoremap <F11> :lua require'dap'.step_over()<CR>
+  nnoremap <F12> :lua require'dap'.step_out()<CR>
 endif
 
 " leave terminal mode
 tnoremap <Esc> <C-\><C-n>
 
-" " insert current datetime
+" insert current datetime
 " nmap <F5> a<C-R>=strftime("%Y-%m-%d %I:%M:%S")<CR><Esc>
 " imap <F5> <C-R>=strftime("%Y-%m-%d %I:%M:%S")<CR>
 
