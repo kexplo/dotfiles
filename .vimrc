@@ -14,6 +14,10 @@ set nocompatible
 set nofoldenable
 set hls
 
+if exists("g:neovide")
+  set guifont=JetBrainsMonoNL_Nerd_Font_Mono:h10
+endif
+
 "use backspace
 set bs=indent,eol,start
 
@@ -197,7 +201,9 @@ else " neovim plugins
 
   Plug 'lewis6991/gitsigns.nvim'
 
-  Plug 'sphamba/smear-cursor.nvim'
+  if !exists("g:neovide")
+    Plug 'sphamba/smear-cursor.nvim'
+  endif
 
 endif
 
