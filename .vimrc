@@ -262,20 +262,20 @@ if has('nvim')
     require('mason').setup()
     require('mason-lspconfig').setup()
 
-    local lspconfig = require('lspconfig')
-    lspconfig.jedi_language_server.setup {}
-    lspconfig.gopls.setup {}
-    lspconfig.golangci_lint_ls.setup {}
-    lspconfig.bashls.setup {}
-    lspconfig.eslint.setup {}
-    lspconfig.ts_ls.setup {}
-    lspconfig.ruff.setup {}
-    lspconfig.rust_analyzer.setup {}
-    lspconfig.pyright.setup {}
+    -- use `vim.lsp.config('...', {...})' to setup config, use `vim.lsp.enable(...)` to enable lsp
+    vim.lsp.enable('jedi_language_server')
+    vim.lsp.enable('gopls')
+    vim.lsp.enable('golangci_lint_ls')
+    vim.lsp.enable('bashls')
+    vim.lsp.enable('eslint')
+    vim.lsp.enable('ts_ls')
+    vim.lsp.enable('ruff')
+    vim.lsp.enable('pyright')
+    vim.lsp.enable('rust_analyzer')
 
     local cmp = require("cmp")
     cmp.setup {
-      sources = {
+      sources = cmp.config.sources({
         { name = 'nvim_lsp'},
         {
           name = 'path',
@@ -283,7 +283,9 @@ if has('nvim')
             trailing_slash = true
           },
         },
-      },
+      }, {
+        { name = 'buffer' },
+      }),
       -- SEE: https://github.com/hrsh7th/nvim-cmp/issues/231#issuecomment-1098175017
       mapping = cmp.mapping.preset.insert()
     }
