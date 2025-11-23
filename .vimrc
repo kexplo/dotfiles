@@ -376,9 +376,10 @@ lua << EOF
 require('gitsigns').setup()
 EOF
 
-lua << EOF
-require('smear_cursor').enabled = true
-EOF
+
+if !exists("g:neovide")
+  lua require('smear_cursor').enabled = true
+endif
 
 endif
 
