@@ -241,6 +241,10 @@ function uvs() {
     source .venv/bin/activate
 }
 
+# atuin
+. "$HOME/.atuin/bin/env"
+eval "$(atuin init zsh)"
+
 # Load local config
 if [[ -f ~/.zshrc.local ]]; then
   source ~/.zshrc.local
