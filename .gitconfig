@@ -8,7 +8,7 @@
 	# -X: no screen clear when exit.
 	# -R:
 	pager = less -R -X -e
-	editor = vim
+	editor = nvim
 [gui]
 	encoding = utf-8
 [alias]
