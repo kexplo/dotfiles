@@ -128,6 +128,11 @@ Plug 'HerringtonDarkholme/yats.vim', { 'for': ['javascript', 'typescript', 'type
 Plug 'maxmellon/vim-jsx-pretty', {  'for': ['javascript', 'typescript', 'typescriptreact'] }
 
 Plug 'tpope/vim-fugitive'
+Plug 'ledger/vim-ledger'
+  let g:ledger_maxwidth = 120
+  let g:ledger_align_at = 90
+
+Plug 'kexplo/cmp-hledger'
 
 if !has('nvim') " vim(not neovim) plugins
   Plug 'scrooloose/nerdtree'
@@ -283,6 +288,7 @@ if has('nvim')
             trailing_slash = true
           },
         },
+        { name = 'hledger' },
       }, {
         { name = 'buffer' },
       }),
