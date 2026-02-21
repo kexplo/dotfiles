@@ -234,6 +234,21 @@ fi
 
 ############################################################################################
 
+# Set terminal window/tab title using OSC 2, terminated by ST (ESC \).
+function set-pane-title() {
+  # Join all args as a single string
+  local title="$*"
+
+  # If no args, do nothing
+  if [[ -z "$title" ]]; then
+    return
+  fi
+
+  # OSC 2 ; <title> ST
+  # ST is ESC backslash
+  printf '\033]2;%s\033\\' "$title"
+}
+
 function uvs() {
     if [ ! -d .venv ]; then
         uv venv
