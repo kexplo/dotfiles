@@ -154,6 +154,7 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
 export PATH="$PATH:/usr/local/go/bin"
 export LESS='-RXF'
+export LESSCHARSET=utf-8
 
 # fzf
 alias fzfp="fzf --preview 'head -100 {}'"
